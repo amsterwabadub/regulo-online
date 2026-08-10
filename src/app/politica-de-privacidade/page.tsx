@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>2. Analytics</h2>
           <p>
-            We use privacy-compliant Google Analytics 4 (GA4) to collect aggregated usage metrics (e.g. calculator start and completion events) to improve application performance. No personal financial data is sent to analytics.
+            When analytics is enabled, we use Google Analytics 4 (GA4) to collect aggregated usage metrics (e.g. calculator start and completion events) to improve application performance. No personal financial data is sent to analytics.
           </p>
 
           <h2>3. Disclaimers</h2>
