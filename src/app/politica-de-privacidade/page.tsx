@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy & Terms | ReguKit',
-  description: 'Learn how ReguKit protects user privacy, minimal data processing, and compliance standards.',
+  title: 'Privacy Policy & Terms | Regulo',
+  description: 'Learn how Regulo protects user privacy, minimal data processing, and compliance standards.',
   alternates: {
-    canonical: 'https://regukit.com/politica-de-privacidade',
+    canonical: 'https://regulo.online/politica-de-privacidade',
   },
 };
 
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
         <div className="content-section">
           <h2>1. Zero Data Logging Policy</h2>
           <p>
-            ReguKit processes all statutory calculations (PAYE, NSSF, SHIF, ISR, CNSS, UVT, Retención en la Fuente) 
+            Regulo processes all statutory calculations (PAYE, NSSF, SHIF, ISR, CNSS, UVT, Retención en la Fuente)
             locally in your browser. No income data, financial parameters, or personal identifiers are stored on our servers.
           </p>
 
@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>3. Disclaimers</h2>
           <p>
-            ReguKit provides statutory estimates based on public tax legislation. For official legal or tax advice, consult qualified professional counsel.
+            Regulo provides statutory estimates based on public tax legislation. For official legal or tax advice, consult qualified professional counsel.
           </p>
         </div>
       </div>
