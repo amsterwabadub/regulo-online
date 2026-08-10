@@ -24,6 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      // Kenya country homepage — hub for the /ke long-tail routes below.
+      url: `${baseUrl}/ke`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/politica-de-privacidade`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,

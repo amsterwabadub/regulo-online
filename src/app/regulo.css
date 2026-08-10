@@ -1,0 +1,1895 @@
+/* ==========================================================================
+   REGULO PRODUCTION UI SYSTEM
+   --------------------------------------------------------------------------
+   Two layers, deliberately separated:
+
+     1. CORE REGULO  — neutrals, type scale, spacing, radius, elevation,
+                       control sizing, containers, focus states.
+     2. COUNTRY THEME — primary / accent / surfaces / result semantics.
+
+   Country colors are NEVER written as magic hex values inside components.
+   A country page opts in with `.rg-theme-<code>` and everything re-tints.
+
+   All selectors are `rg-` prefixed so this file cannot regress the existing
+   long-tail calculator pages, which continue to use globals.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CORE REGULO TOKENS
+   -------------------------------------------------------------------------- */
+
+.rg-page {
+  /* Typography ---------------------------------------------------------- */
+  --rg-font-display: var(--font-sora), "Sora", system-ui, sans-serif;
+  --rg-font-sans: var(--font-public-sans), "Public Sans", system-ui, sans-serif;
+
+  --rg-text-hero: clamp(1.8125rem, 1rem + 3.6vw, 3.375rem); /* 29 → 54 */
+  --rg-text-h2: clamp(1.5rem, 1.1rem + 1.7vw, 2rem); /* 24 → 32 */
+  --rg-text-h3: 1.375rem;
+  --rg-text-lead: clamp(1rem, 0.94rem + 0.25vw, 1.125rem);
+  --rg-text-body: 0.9375rem;
+  --rg-text-sm: 0.875rem;
+  --rg-text-xs: 0.8125rem;
+
+  /* Neutrals — Cream Surface and Dark Ink straight from the supplied style
+     guide, with a small derived ramp for muted text and borders. ----------- */
+  --rg-bg: #fafefc;
+  --rg-surface: #ffffff;
+  --rg-surface-muted: #f3faf6;
+  --rg-border: #e3ebe7;
+  --rg-border-strong: #cfdcd6;
+  --rg-text: #0f172a;
+  --rg-text-muted: #47596b;
+  --rg-text-subtle: #6b7c8a;
+
+  /* Spacing / layout ---------------------------------------------------- */
+  --rg-container: 1240px;
+  --rg-gutter: 48px;
+  --rg-section-y: 80px;
+
+  /* Radius -------------------------------------------------------------- */
+  --rg-r-xs: 6px;
+  --rg-r-sm: 8px;
+  --rg-r-md: 12px;
+  --rg-r-lg: 16px;
+  --rg-r-xl: 20px;
+  --rg-r-2xl: 24px;
+
+  /* Elevation ----------------------------------------------------------- */
+  --rg-shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.04);
+  --rg-shadow-card: 0 1px 2px oklch(0% 0 0 / 0.04), 0 24px 56px oklch(0% 0 0 / 0.1);
+  --rg-shadow-float: 0 8px 24px oklch(0% 0 0 / 0.1);
+
+  /* Control sizing ------------------------------------------------------ */
+  --rg-control-h: 52px;
+  --rg-cta-h: 56px;
+  --rg-chip-h: 44px;
+
+  font-family: var(--rg-font-sans);
+  color: var(--rg-text);
+  background: var(--rg-bg);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   2. COUNTRY THEME — KENYA
+   -------------------------------------------------------------------------- */
+
+/* Palette values are the supplied style guide's, verbatim:
+   Deep Green #065F46 · Red Accent #E11D2E · Mint #F3FAF6 · Cream #FAFEFC
+   · Dark Ink #0F172A. Everything else is a derived tint of those five. */
+.rg-theme-ke {
+  --rg-primary: #065f46;
+  --rg-primary-strong: #054c38;
+  --rg-primary-deep: #04382a;
+  --rg-primary-hover: #08744f;
+  --rg-primary-soft: #e6f4ed;
+  --rg-primary-wash: #f3faf6;
+  --rg-primary-line: #c6e2d5;
+  --rg-on-primary: #ffffff;
+
+  --rg-accent: #e11d2e;
+  --rg-accent-strong: #b11d2e;
+  --rg-accent-hover: #c8172a;
+  --rg-accent-soft: #fdeff1;
+  --rg-accent-line: rgba(225, 29, 46, 0.2);
+  --rg-on-accent: #ffffff;
+
+  /* Result semantics. The style guide sets deduction amounts in dark ink and
+     reserves green for the take-home line — red is kept for CTAs only. */
+  --rg-result-positive: #065f46;
+  --rg-result-negative: #0f172a;
+  --rg-result-surface: #f7faf9;
+  --rg-result-line: #e4ebe8;
+
+  --rg-focus: #065f46;
+
+  /* Illustration palette — the art recolours from the country theme ------- */
+  --rg-art-sky-top: oklch(98% 0.018 95);
+  --rg-art-sky-bottom: oklch(94% 0.035 152);
+  --rg-art-sun: oklch(86% 0.11 78);
+  --rg-art-hill: oklch(84% 0.055 152);
+  --rg-art-far: oklch(80% 0.05 152);
+  --rg-art-mid: oklch(70% 0.06 152);
+  --rg-art-near: oklch(48% 0.075 152);
+  --rg-art-accent: oklch(52% 0.17 28);
+  --rg-art-window: oklch(97% 0.03 95);
+  --rg-art-tree: oklch(45% 0.075 152);
+  --rg-art-ground: oklch(40% 0.06 152);
+
+  --rg-art-skin-a: oklch(58% 0.07 55);
+  --rg-art-skin-b: oklch(50% 0.075 50);
+  --rg-art-hair: oklch(24% 0.03 60);
+  --rg-art-shirt: oklch(98% 0.006 95);
+  --rg-art-headset: oklch(32% 0.03 152);
+  --rg-art-bubble: oklch(93% 0.035 152);
+  --rg-art-bubble-ink: oklch(31% 0.098 152);
+}
+
+/* --------------------------------------------------------------------------
+   3. PRIMITIVES
+   -------------------------------------------------------------------------- */
+
+.rg-page *,
+.rg-page *::before,
+.rg-page *::after {
+  box-sizing: border-box;
+}
+
+.rg-shell {
+  width: 100%;
+  max-width: var(--rg-container);
+  margin-inline: auto;
+  padding-inline: var(--rg-gutter);
+}
+
+.rg-page h1,
+.rg-page h2,
+.rg-page h3,
+.rg-page h4 {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--rg-text);
+  margin: 0;
+}
+
+.rg-page p {
+  margin: 0;
+}
+
+.rg-page a {
+  color: var(--rg-primary);
+  text-decoration: none;
+}
+
+.rg-page a:hover {
+  text-decoration: underline;
+}
+
+/* Visible, consistent focus for every interactive element ---------------- */
+.rg-page a:focus-visible,
+.rg-page button:focus-visible,
+.rg-page input:focus-visible,
+.rg-page select:focus-visible,
+.rg-page summary:focus-visible {
+  outline: 3px solid var(--rg-focus);
+  outline-offset: 2px;
+  border-radius: var(--rg-r-xs);
+}
+
+.rg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Buttons ---------------------------------------------------------------- */
+/* Style-guide buttons: 10px radius, bold label, generous padding, a hairline
+   of depth. Deep green for primary actions, red reserved for the key
+   conversion CTA. */
+.rg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding-inline: 24px;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--rg-font-sans);
+  font-size: var(--rg-text-body);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.07);
+  transition: background-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+  text-decoration: none;
+}
+
+.rg-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
+}
+
+.rg-btn:active {
+  transform: translateY(0);
+}
+
+.rg-btn:hover {
+  text-decoration: none;
+}
+
+/* Specificity note: `.rg-page a` (0,1,1) outranks a bare `.rg-btn--primary`
+   (0,1,0), which would paint button labels in the link colour — dark on dark.
+   These rules are deliberately written at (0,2,0) to win. */
+.rg-page .rg-btn--primary {
+  background: var(--rg-primary);
+  color: var(--rg-on-primary);
+}
+.rg-page .rg-btn--primary:hover {
+  background: var(--rg-primary-hover);
+  color: var(--rg-on-primary);
+}
+
+.rg-page .rg-btn--accent {
+  background: var(--rg-accent);
+  color: var(--rg-on-accent);
+}
+.rg-page .rg-btn--accent:hover {
+  background: var(--rg-accent-hover);
+  color: var(--rg-on-accent);
+}
+
+/* Card- and chrome-level links must never pick up the content underline. */
+.rg-page a.rg-btn:hover,
+.rg-page a.rg-tool:hover,
+.rg-page a.rg-brand:hover {
+  text-decoration: none;
+}
+
+.rg-btn--block {
+  width: 100%;
+  height: var(--rg-cta-h);
+  font-size: 1rem;
+}
+
+.rg-btn--lg {
+  height: 58px;
+  padding-inline: 34px;
+  font-size: 1.0625rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(225, 29, 46, 0.28);
+}
+
+.rg-btn--ghost {
+  background: transparent;
+  color: var(--rg-primary);
+  padding-inline: 0;
+  height: auto;
+  font-size: var(--rg-text-sm);
+}
+
+/* Eyebrow + section heading ---------------------------------------------- */
+.rg-eyebrow {
+  font-size: var(--rg-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rg-primary);
+  margin: 0 0 12px;
+}
+
+.rg-section-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.rg-section-heading h2 {
+  font-size: var(--rg-text-h2);
+}
+
+.rg-section-heading__sub {
+  margin-top: 12px;
+  color: var(--rg-text-muted);
+  font-size: var(--rg-text-body);
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER
+   -------------------------------------------------------------------------- */
+
+.rg-header {
+  background: var(--rg-surface);
+  border-bottom: 1px solid var(--rg-border);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.rg-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 80px;
+}
+
+.rg-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.rg-brand:hover {
+  text-decoration: none;
+}
+
+.rg-brand__word {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--rg-text);
+  letter-spacing: -0.02em;
+}
+
+.rg-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: var(--rg-text-body);
+  font-weight: 500;
+}
+
+.rg-header__nav a {
+  color: var(--rg-text);
+}
+
+.rg-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.rg-country-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding-inline: 14px;
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-sm);
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+  color: var(--rg-text);
+  background: var(--rg-surface);
+}
+
+.rg-header__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-sm);
+  background: var(--rg-surface);
+  color: var(--rg-text);
+  cursor: pointer;
+}
+
+.rg-header__drawer {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0 20px;
+  border-top: 1px solid var(--rg-border);
+}
+
+.rg-header__drawer a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding-inline: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rg-text);
+}
+
+.rg-header__drawer--open {
+  display: flex;
+}
+
+/* --------------------------------------------------------------------------
+   5. HERO
+   -------------------------------------------------------------------------- */
+
+.rg-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px;
+  background:
+    radial-gradient(120% 90% at 8% 100%, var(--rg-primary-soft) 0%, transparent 62%),
+    linear-gradient(180deg, var(--rg-primary-wash) 0%, var(--rg-bg) 78%);
+}
+
+/* The calculator is the product, so it takes the larger share of the fold —
+   matching the visual reference, where the card is wider than the copy. */
+/* Deliberately NOT positioned: the hero art is absolute and must resolve
+   against .rg-hero so it can bleed to the viewport edge rather than stopping
+   at the container gutter. */
+.rg-hero__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* Decorative Nairobi skyline — pure SVG, no photographic payload. */
+/* A full-height Nairobi panel occupying the left of the fold — the local
+   anchor the reference gets from photography. The SVG carries its own vertical
+   fade; this adds a horizontal one so the scene dissolves before it reaches
+   the calculator instead of ending on a hard edge. */
+.rg-hero__art {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 54%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, #000 0%, #000 52%, transparent 92%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 52%, transparent 92%);
+}
+
+/* Light scrim so the dark-ink headline holds its contrast over the
+   photograph, exactly as the reference washes its hero image. */
+.rg-hero__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(243, 250, 246, 0.97) 0%,
+      rgba(243, 250, 246, 0.78) 32%,
+      rgba(243, 250, 246, 0.2) 60%,
+      rgba(243, 250, 246, 0) 86%
+    ),
+    linear-gradient(
+      104deg,
+      rgba(250, 254, 252, 0.97) 0%,
+      rgba(250, 254, 252, 0.93) 30%,
+      rgba(250, 254, 252, 0.66) 52%,
+      rgba(250, 254, 252, 0.14) 78%,
+      rgba(250, 254, 252, 0) 100%
+    );
+}
+
+/* Kenyan geometric motif — a woven zigzag band used sparingly as a divider.
+   Country identity that survives removing the flag and the word "Kenya". */
+.rg-motif {
+  height: 10px;
+  background-image:
+    linear-gradient(45deg, var(--rg-primary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--rg-accent) 25%, transparent 25%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 0;
+  opacity: 0.55;
+}
+
+/* Light plate with the flag and dark green label, as in the reference image.
+   The design-system prototype specifies a solid green chip here; the reference
+   image is the authoritative source for appearance, so it wins. */
+.rg-badge-country {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding-inline: 14px;
+  border-radius: var(--rg-r-sm);
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  color: var(--rg-primary-strong);
+  font-size: var(--rg-text-xs);
+  font-weight: 700;
+  margin-bottom: 24px;
+  box-shadow: var(--rg-shadow-sm);
+}
+
+.rg-hero__title {
+  font-size: var(--rg-text-hero);
+  line-height: 1.01;
+  letter-spacing: -0.035em;
+  margin: 0 0 22px;
+  max-width: 10.5em;
+  text-wrap: balance;
+}
+
+.rg-hero__title em {
+  font-style: normal;
+  color: var(--rg-primary);
+}
+
+.rg-hero__lead {
+  font-size: var(--rg-text-lead);
+  line-height: 1.62;
+  color: var(--rg-text-muted);
+  max-width: 30em;
+  margin: 0 0 30px;
+}
+
+/* Keeps the copy clear of the skyline masses below it. The z-index matters:
+   the art is absolutely positioned and follows this block in DOM order, so
+   without a stacking level of its own the copy would be painted over. */
+.rg-hero__copy {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 72px;
+}
+
+.rg-feature-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 452px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Icon over a centred label, matching the reference plates. */
+.rg-feature-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 8px;
+  min-height: 76px;
+  padding: 11px 8px;
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-md);
+  background: var(--rg-surface);
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.rg-feature-chip svg {
+  color: var(--rg-primary);
+  flex-shrink: 0;
+}
+
+/* Icon sits in a tinted disc so the plates read as designed objects */
+.rg-feature-chip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--rg-primary-soft);
+  color: var(--rg-primary);
+}
+
+.rg-hero__assurance {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-md);
+  max-width: 432px;
+}
+
+.rg-hero__assurance-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--rg-r-sm);
+  background: var(--rg-primary-soft);
+  border: none;
+  color: var(--rg-primary);
+  flex-shrink: 0;
+}
+
+.rg-hero__assurance-text {
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+}
+
+.rg-hero__rule {
+  height: 1px;
+  background: var(--rg-border);
+}
+
+/* --------------------------------------------------------------------------
+   6. CALCULATOR
+   -------------------------------------------------------------------------- */
+
+.rg-calc {
+  position: relative;
+  background: var(--rg-surface);
+  border: 1px solid oklch(100% 0 0 / 0.6);
+  border-radius: var(--rg-r-2xl);
+  box-shadow:
+    0 1px 2px oklch(20% 0.02 152 / 0.05),
+    0 8px 20px oklch(20% 0.02 152 / 0.06),
+    0 32px 64px oklch(20% 0.02 152 / 0.12);
+  padding: 34px;
+  overflow: hidden;
+}
+
+/* Green→red top edge: the two statutory colors of the Kenya theme. */
+.rg-calc::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--rg-primary) 0%, var(--rg-primary) 45%, var(--rg-accent) 100%);
+}
+
+.rg-calc__title {
+  font-family: var(--rg-font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0 0 28px;
+}
+
+/* The result column carries longer strings than the fields, so it gets the
+   larger share — this is what stops "Take-home pay" wrapping. */
+.rg-calc__body {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+/* Grid children default to min-width:auto, so the nowrap result figure would
+   otherwise widen its track and push the panel past the card's clip. */
+.rg-calc__body > * {
+  min-width: 0;
+}
+
+/* Inputs and the employer card stack in column one; the result spans both
+   rows in column two, which is what keeps the two columns balanced. */
+.rg-calc__inputs {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.rg-calc__body > .rg-result {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.rg-calc__body > .rg-employer {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.rg-calc__note {
+  margin-top: 14px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.rg-field {
+  margin-bottom: 18px;
+}
+
+.rg-field__label {
+  display: block;
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--rg-text);
+}
+
+/* Style-guide input shell: white, hairline border, 12px radius, unit suffix
+   right-aligned in muted ink. */
+.rg-field__control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--rg-control-h);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-md);
+  padding-inline: 18px;
+  background: var(--rg-surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rg-field__control:focus-within {
+  border-color: var(--rg-primary);
+  box-shadow: 0 0 0 4px var(--rg-primary-soft);
+}
+
+.rg-field__control input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--rg-font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rg-text);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.rg-field__control input::-webkit-outer-spin-button,
+.rg-field__control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rg-field__unit {
+  color: var(--rg-text-subtle);
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.rg-field select {
+  width: 100%;
+  height: var(--rg-control-h);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-md);
+  padding-inline: 18px;
+  background: var(--rg-surface);
+  font-family: var(--rg-font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rg-text);
+  cursor: pointer;
+  /* Custom chevron so the control matches the rest of the system */
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+
+.rg-field select:focus {
+  border-color: var(--rg-primary);
+}
+
+.rg-field__help {
+  margin-top: 6px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+}
+
+.rg-field__error {
+  margin-top: 6px;
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  color: var(--rg-result-negative);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Progressive disclosure -------------------------------------------------- */
+.rg-advanced__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--rg-primary);
+  font-family: var(--rg-font-sans);
+  font-weight: 600;
+  font-size: var(--rg-text-sm);
+  cursor: pointer;
+}
+
+.rg-advanced__toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.rg-advanced__toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.rg-advanced__panel {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--rg-surface-muted);
+  border-radius: var(--rg-r-md);
+}
+
+.rg-advanced__panel .rg-field:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. RESULT SUMMARY  — the most important component on the page
+   -------------------------------------------------------------------------- */
+
+/* The payoff surface. Tinted ground, oversized figure, and a solid green
+   take-home band that closes the panel — the eye lands on the number first,
+   then reads down to what was taken off. */
+.rg-result {
+  position: relative;
+  background: linear-gradient(180deg, #ecf7f1 0%, #f6fbf8 62%);
+  border: 1px solid #d9ece3;
+  border-radius: var(--rg-r-lg);
+  padding: 26px 24px 0;
+  overflow: hidden;
+}
+
+.rg-result__label {
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+  color: var(--rg-text-muted);
+  margin: 0 0 6px;
+}
+
+.rg-result__value {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: clamp(2.125rem, 1.35rem + 2.2vw, 2.75rem);
+  line-height: 1.02;
+  color: var(--rg-result-positive);
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+/* Composition bar: take-home vs tax vs statutory, as one compact strip.
+   Purely supplementary — every figure it encodes is also printed as text. */
+.rg-share {
+  display: flex;
+  gap: 2px;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 14px 0 16px;
+  background: var(--rg-result-line);
+}
+
+.rg-share__seg {
+  height: 100%;
+}
+
+.rg-share__seg--net {
+  background: var(--rg-primary);
+}
+
+.rg-share__seg--tax {
+  background: var(--rg-accent);
+}
+
+.rg-share__seg--statutory {
+  background: var(--rg-primary-line);
+}
+
+.rg-result__period {
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+  margin-bottom: 16px;
+}
+
+.rg-result__caption {
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  color: var(--rg-text-subtle);
+  margin-bottom: 6px;
+}
+
+.rg-breakdown {
+  margin: 0;
+  padding: 0;
+}
+
+.rg-breakdown__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--rg-text-sm);
+  padding: 7px 0;
+}
+
+.rg-breakdown__row dt {
+  color: var(--rg-text-muted);
+}
+
+.rg-breakdown__row dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rg-breakdown__row dd.is-negative {
+  color: var(--rg-result-negative);
+  font-weight: 500;
+}
+
+.rg-meter {
+  height: 5px;
+  background: var(--rg-result-line);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.rg-meter__fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.rg-meter__fill--tax {
+  background: var(--rg-accent);
+}
+
+.rg-meter__fill--statutory {
+  background: var(--rg-primary);
+}
+
+.rg-result__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--rg-text-sm);
+  font-weight: 700;
+  padding-top: 12px;
+  margin-top: 6px;
+  border-top: 1px solid rgba(6, 95, 70, 0.12);
+}
+
+.rg-result__total dd {
+  color: var(--rg-result-negative);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Full-bleed green band closing the panel */
+.rg-result__net {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 16px -24px 0;
+  padding: 16px 24px;
+  background: #dcf0e6;
+  font-weight: 800;
+  font-size: 1.0625rem;
+}
+
+.rg-result__net dd {
+  font-family: var(--rg-font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.rg-result__net dt,
+.rg-result__net dd {
+  color: var(--rg-result-positive);
+}
+
+.rg-result__net dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.rg-result__net dt,
+.rg-result__total dt,
+.rg-result__net dd,
+.rg-result__total dd {
+  white-space: nowrap;
+}
+
+.rg-result__note {
+  margin-top: 12px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   8. HOW IT WORKS
+   -------------------------------------------------------------------------- */
+
+.rg-section {
+  padding-block: var(--rg-section-y);
+}
+
+.rg-section--tight {
+  padding-block: 0 var(--rg-section-y);
+}
+
+/* Surface rhythm — alternating grounds so the page stops reading as one
+   continuous white sheet. */
+.rg-band--tint {
+  background: var(--rg-surface-muted);
+  border-block: 1px solid var(--rg-border);
+}
+
+.rg-band--wash {
+  background: linear-gradient(180deg, var(--rg-bg), var(--rg-primary-wash));
+}
+
+.rg-band--plain {
+  background: var(--rg-surface);
+}
+
+.rg-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+  list-style: none;
+  padding: 0;
+}
+
+.rg-steps::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16.5%;
+  right: 16.5%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--rg-primary-line) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+/* Each step is a surface, so the section reads as three objects rather than
+   three floating captions. */
+.rg-step {
+  position: relative;
+  text-align: center;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-xl);
+  padding: 40px 26px 28px;
+  box-shadow: var(--rg-shadow-sm);
+}
+
+.rg-step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--rg-r-lg);
+  background: var(--rg-primary);
+  color: var(--rg-on-primary);
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  /* Straddles the card edge so the sequence reads at a glance */
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 6px 16px oklch(31% 0.098 152 / 0.28);
+  z-index: 1;
+}
+
+.rg-step__title {
+  font-family: var(--rg-font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.rg-step__text {
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-subtle);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   9. TOOL CARDS
+   -------------------------------------------------------------------------- */
+
+/* Three across rather than six: the reference's six-up reads as design-system
+   swatches at production width. Fewer, larger cards give the icons room and
+   the descriptions somewhere to live. */
+.rg-tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rg-tool {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-xl);
+  padding: 30px 28px 26px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* Country accent edge revealed on hover */
+.rg-tool::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rg-primary), var(--rg-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.rg-tool:hover {
+  border-color: var(--rg-primary-line);
+  box-shadow: 0 16px 36px rgba(6, 95, 70, 0.14);
+  transform: translateY(-4px);
+  text-decoration: none;
+}
+
+.rg-tool:hover::after {
+  transform: scaleX(1);
+}
+
+.rg-tool__icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.rg-tool__name {
+  font-family: var(--rg-font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--rg-text);
+  margin-bottom: 8px;
+}
+
+.rg-tool__desc {
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-subtle);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.rg-tool__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--rg-text-sm);
+  font-weight: 700;
+  color: var(--rg-primary);
+  padding-top: 14px;
+  border-top: 1px solid var(--rg-border);
+}
+
+/* --------------------------------------------------------------------------
+   10. TRUST PANEL
+   -------------------------------------------------------------------------- */
+
+.rg-trust {
+  display: grid;
+  grid-template-columns: 0.96fr 1.04fr;
+  gap: 44px;
+  align-items: center;
+  background:
+    radial-gradient(90% 120% at 100% 0%, oklch(100% 0 0 / 0.55), transparent 60%),
+    linear-gradient(135deg, var(--rg-primary-wash), var(--rg-primary-soft));
+  border: 1px solid var(--rg-primary-line);
+  border-radius: var(--rg-r-2xl);
+  padding: 56px;
+}
+
+.rg-trust h2 {
+  font-size: 1.75rem;
+  letter-spacing: -0.025em;
+}
+
+.rg-trust__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+}
+
+.rg-trust__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.rg-trust__list svg {
+  color: var(--rg-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rg-trust__art {
+  position: relative;
+  display: block;
+}
+
+.rg-trust__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1.06);
+  transform-origin: center;
+  filter: drop-shadow(0 18px 38px rgba(15, 23, 42, 0.16));
+}
+
+/* ------------------------------------------------------- employer cost card
+   Real output from the production engine that the page was not yet surfacing.
+   It also balances the calculator's input column against the taller result. */
+.rg-employer {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px dashed var(--rg-border-strong);
+  border-radius: var(--rg-r-md);
+  background: transparent;
+}
+
+.rg-employer__label {
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  color: var(--rg-text-subtle);
+  margin-bottom: 2px;
+}
+
+.rg-employer__value {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--rg-text-muted);
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+
+.rg-employer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+}
+
+.rg-employer__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rg-employer__list span:last-child {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rg-trust__badge {
+  position: absolute;
+  bottom: -6px;
+  left: -34px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--rg-surface);
+  border-radius: var(--rg-r-lg);
+  padding: 14px 18px;
+  box-shadow: var(--rg-shadow-float);
+  max-width: 220px;
+}
+
+.rg-trust__badge-title {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: var(--rg-text-body);
+}
+
+.rg-trust__badge-text {
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   11. SUPPORT / MONETIZATION SLOT
+   -------------------------------------------------------------------------- */
+
+.rg-support {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  background:
+    radial-gradient(80% 120% at 0% 100%, oklch(100% 0 0 / 0.6), transparent 62%),
+    linear-gradient(120deg, var(--rg-accent-soft), var(--rg-surface-muted));
+  border: 1px solid var(--rg-accent-line);
+  border-radius: var(--rg-r-2xl);
+  padding: 40px 48px;
+  overflow: hidden;
+}
+
+.rg-support__art {
+  width: 340px;
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: -40px;
+}
+
+.rg-support__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rg-support__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--rg-r-lg);
+  background: var(--rg-surface);
+  color: var(--rg-accent);
+  flex-shrink: 0;
+  box-shadow: var(--rg-shadow-sm);
+}
+
+.rg-support__title {
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.rg-support__points {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-muted);
+}
+
+.rg-support__points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rg-support__points svg {
+  color: var(--rg-accent);
+  flex-shrink: 0;
+}
+
+.rg-support__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.rg-support__eyebrow {
+  font-size: var(--rg-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rg-accent-strong);
+  margin-bottom: 8px;
+}
+
+.rg-support__title {
+  font-size: 1.375rem;
+  margin-bottom: 8px;
+}
+
+.rg-support__text {
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-muted);
+  max-width: 460px;
+}
+
+/* --------------------------------------------------------------------------
+   12. FAQ
+   -------------------------------------------------------------------------- */
+
+.rg-faq {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.rg-faq__item {
+  border-bottom: 1px solid var(--rg-border);
+}
+
+.rg-faq__item summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  list-style: none;
+}
+
+.rg-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.rg-faq__sign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rg-primary-soft);
+  color: var(--rg-primary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.rg-faq__item[open] .rg-faq__sign {
+  transform: rotate(45deg);
+}
+
+.rg-faq__answer {
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-muted);
+  line-height: 1.6;
+  padding-bottom: 20px;
+  max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   12b. STICKY MOBILE ACTION BAR
+   Mobile only: a persistent route back to the calculator once the user has
+   scrolled into the content. Hidden entirely on desktop, where the calculator
+   is already in the first viewport.
+   -------------------------------------------------------------------------- */
+
+.rg-sticky-bar {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .rg-sticky-bar {
+    display: block;
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    padding: 12px var(--rg-gutter);
+    background: var(--rg-surface);
+    border-top: 1px solid var(--rg-border);
+  }
+
+  .rg-sticky-bar .rg-btn {
+    width: 100%;
+    height: 50px;
+  }
+}
+
+/* Anchor targets must clear the sticky header. */
+.rg-page [id] {
+  scroll-margin-top: 96px;
+}
+
+/* --------------------------------------------------------------------------
+   13. FOOTER
+   -------------------------------------------------------------------------- */
+
+/* Deep green close to the page — anchors the brand and breaks the run of
+   light sections above it. */
+.rg-footer {
+  background: var(--rg-primary-deep);
+  color: #cfe3d9;
+  padding-block: 72px 36px;
+}
+
+/* The mark keeps its geometry and simply maps its colour slots to the
+   reversed treatment for a dark ground. */
+.rg-footer .rg-brand {
+  --rg-primary: oklch(88% 0.08 152);
+  --rg-accent: oklch(66% 0.17 28);
+}
+
+.rg-footer .rg-brand__word {
+  color: #ffffff;
+}
+
+.rg-footer .rg-footer__desc {
+  color: #9fc0b1;
+}
+
+.rg-footer .rg-footer__col h2 {
+  color: #ffffff;
+}
+
+.rg-footer .rg-footer__links a {
+  color: #a9c8ba;
+}
+
+.rg-footer .rg-footer__links a:hover {
+  color: #ffffff;
+}
+
+.rg-footer .rg-footer__bottom {
+  border-top-color: oklch(100% 0 0 / 0.14);
+  color: #8fb4a3;
+}
+
+.rg-footer .rg-footer__disclaimer {
+  color: #7ea593;
+}
+
+.rg-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.rg-footer__desc {
+  font-size: var(--rg-text-sm);
+  color: var(--rg-text-subtle);
+  margin-top: 12px;
+  max-width: 260px;
+}
+
+.rg-footer__col h2 {
+  font-family: var(--rg-font-sans);
+  font-size: var(--rg-text-sm);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.rg-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--rg-text-sm);
+}
+
+.rg-footer__links a {
+  color: var(--rg-text-subtle);
+}
+
+.rg-footer__links a:hover {
+  color: var(--rg-primary);
+}
+
+.rg-footer__bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--rg-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+}
+
+.rg-footer__disclaimer {
+  margin-top: 16px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   14. RESPONSIVE — real mobile layout, not stacked desktop blocks
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1180px) {
+  .rg-tools {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .rg-page {
+    --rg-gutter: 24px;
+    --rg-section-y: 56px;
+  }
+
+  .rg-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* On a phone the calculator card covers the lower hero, so a positioned
+     skyline would sit behind it. Drop it into flow instead: a full-strength
+     band between the headline and the calculator. */
+  .rg-hero__art {
+    position: relative;
+    width: 100%;
+    height: 132px;
+    opacity: 1;
+    border-radius: var(--rg-r-lg);
+    overflow: hidden;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  /* No text sits over the mobile band, so it shows at full strength. */
+  .rg-hero__art::after {
+    display: none;
+  }
+
+  .rg-hero__copy {
+    padding-bottom: 0;
+  }
+
+  .rg-support {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 32px;
+  }
+
+  .rg-support__art {
+    width: 200px;
+    align-self: center;
+    margin-bottom: -32px;
+  }
+
+  .rg-header__nav {
+    display: none;
+  }
+
+  .rg-header__burger {
+    display: inline-flex;
+  }
+
+  .rg-trust {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px;
+  }
+
+  .rg-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .rg-page {
+    --rg-gutter: 20px;
+    --rg-section-y: 40px;
+    /* Clears the sticky action bar */
+    padding-bottom: 82px;
+  }
+
+  /* Compact header on mobile */
+  .rg-header__inner {
+    height: 64px;
+  }
+
+  .rg-header__actions .rg-btn {
+    display: none;
+  }
+
+  /* The calculator is the product: on a phone it must be reachable without
+     scrolling past a wall of trust chips. Both are restated in full by the
+     "Built for Kenya" section further down, so nothing is lost. */
+  .rg-feature-row,
+  .rg-hero__assurance {
+    display: none;
+  }
+
+  .rg-hero {
+    padding-top: 22px;
+  }
+
+  .rg-hero__grid {
+    gap: 22px;
+  }
+
+  .rg-hero__lead {
+    margin-bottom: 0;
+  }
+
+  .rg-calc {
+    border-radius: 18px;
+  }
+
+  /* Steps become left-aligned rows — a centred column of 56px discs wastes
+     most of a phone screen. */
+  .rg-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-areas: 'num title' 'num text';
+    column-gap: 14px;
+    text-align: left;
+  }
+
+  .rg-step__num {
+    grid-area: num;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: var(--rg-r-md);
+    font-size: 1rem;
+  }
+
+  .rg-step__title {
+    grid-area: title;
+    margin-bottom: 4px;
+  }
+
+  .rg-step__text {
+    grid-area: text;
+    font-size: var(--rg-text-xs);
+  }
+
+  .rg-calc {
+    padding: 24px 20px;
+  }
+
+  /* Inputs, then the result, then the employer detail — the result must not be
+     pushed off the first screen by secondary information. */
+  .rg-calc__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .rg-calc__inputs {
+    order: 1;
+  }
+
+  .rg-calc__body > .rg-result {
+    order: 2;
+  }
+
+  .rg-calc__body > .rg-employer {
+    order: 3;
+    margin-top: 0;
+  }
+
+  /* 4 narrow chips become unreadable on a phone — 2x2 keeps the labels intact */
+  .rg-feature-row {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: none;
+  }
+
+  .rg-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .rg-steps::before {
+    display: none;
+  }
+
+  /* Tool cards become full-width horizontal rows: icon, label, chevron.
+     Shorter than stacked cards and a far better touch target. */
+  .rg-tools {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .rg-tool {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    grid-template-areas: 'icon name arrow' 'icon desc arrow';
+    align-items: center;
+    column-gap: 14px;
+    padding: 16px;
+    border-radius: var(--rg-r-lg);
+  }
+
+  .rg-tool:hover {
+    transform: none;
+  }
+
+  .rg-tool__icon {
+    grid-area: icon;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
+
+  .rg-tool__name {
+    grid-area: name;
+    font-size: var(--rg-text-sm);
+    margin: 0 0 2px;
+  }
+
+  .rg-tool__desc {
+    grid-area: desc;
+    font-size: var(--rg-text-xs);
+    margin: 0;
+    flex: none;
+  }
+
+  /* Keep the arrow, drop the label — it still reads out to screen readers. */
+  .rg-tool__cta {
+    grid-area: arrow;
+    font-size: 0;
+  }
+
+  .rg-support {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .rg-support .rg-btn {
+    width: 100%;
+  }
+
+  .rg-trust {
+    padding: 24px;
+  }
+
+  .rg-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .rg-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Two tool columns are retained right down to small phones — a single column
+   turned the section into an eight-screen scroll for no legibility gain. */
+@media (max-width: 360px) {
+  .rg-tools,
+  .rg-feature-row {
+    gap: 10px;
+  }
+
+  .rg-tool {
+    padding: 16px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rg-page * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,8 +1,27 @@
 import type { Metadata } from 'next';
+import { Sora, Public_Sans } from 'next/font/google';
 import './globals.css';
+import './regulo.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import GlobalChrome, { MainSlot } from '@/components/GlobalChrome';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+
+// Self-hosted by next/font — no render-blocking request to Google, and the
+// variables are only consumed by `.rg-page`, so existing pages are unaffected.
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-sora',
+  display: 'swap',
+});
+
+const publicSans = Public_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-public-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://regulo.online'),
@@ -48,12 +67,16 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${sora.variable} ${publicSans.variable}`}>
       <body>
         <GoogleAnalytics gaId={gaId} />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <GlobalChrome>
+          <Header />
+        </GlobalChrome>
+        <MainSlot>{children}</MainSlot>
+        <GlobalChrome>
+          <Footer />
+        </GlobalChrome>
       </body>
     </html>
   );
