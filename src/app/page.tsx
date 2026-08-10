@@ -4,8 +4,27 @@ import { COUNTRIES } from '@/config/countries';
 import { CALCULATOR_CONFIGS } from '@/config/calculators';
 
 export default function HomePage() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Regulo',
+    url: 'https://regulo.online',
+    description:
+      'Localized statutory and payroll calculators for Kenya, Mexico, Morocco, and Colombia.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Regulo',
+      url: 'https://regulo.online',
+    },
+  };
+
   return (
     <div className="container" style={{ paddingTop: '2.5rem', paddingBottom: '4rem' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+
       {/* Homepage Hero Header */}
       <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <div className="trust-badge" style={{ marginBottom: '1rem' }}>
