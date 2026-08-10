@@ -10,6 +10,8 @@ interface SupportCTAProps {
   points: string[];
   ctaLabel: string;
   ctaHref: string;
+  /** Country support artwork. Defaults to the Kenya duo. */
+  imageSrc?: string;
 }
 
 /**
@@ -29,12 +31,13 @@ export default function SupportCTA({
   points,
   ctaLabel,
   ctaHref,
+  imageSrc = '/ke/support-team.webp',
 }: SupportCTAProps) {
   return (
     <aside className="rg-support">
       <div className="rg-support__art">
         <Image
-          src="/ke/support-team.webp"
+          src={imageSrc}
           alt=""
           width={860}
           height={610}

@@ -16,6 +16,8 @@ interface CountryFooterProps {
   columns: FooterColumn[];
   /** Factual disclaimer — never a trust claim we cannot support. */
   disclaimer: string;
+  /** Localised privacy line. Defaults to the English original. */
+  privacyNote?: string;
 }
 
 export default function CountryFooter({
@@ -25,6 +27,7 @@ export default function CountryFooter({
   tagline,
   columns,
   disclaimer,
+  privacyNote = 'Calculations run in your browser.',
 }: CountryFooterProps) {
   return (
     <footer className="rg-footer">
@@ -40,7 +43,7 @@ export default function CountryFooter({
               style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 16 }}
             >
               <IconLock size={18} />
-              Calculations run in your browser.
+              {privacyNote}
             </p>
           </div>
 

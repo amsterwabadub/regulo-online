@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
  * These two gates hide the global chrome on those routes only — every other
  * route keeps the existing Header/<main>/Footer structure untouched.
  */
-const SELF_CHROMED_ROUTES = new Set(['/ke']);
+const SELF_CHROMED_ROUTES = new Set(['/ke', '/co']);
 
 function isSelfChromed(pathname: string | null) {
   return Boolean(pathname && SELF_CHROMED_ROUTES.has(pathname));

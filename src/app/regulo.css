@@ -1893,3 +1893,402 @@
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   COUNTRY THEME — COLOMBIA
+   --------------------------------------------------------------------------
+   Palette sampled from the supplied "Regulo Colombia — Guía de estilo":
+   Principal #0066FF · Azul oscuro #0F306F · Amarillo #FFC107 ·
+   Azul claro #E8F2FF · Crema #FFF9ED · Ink #0F172A (shared with Kenya).
+
+   Declared after .rg-page so a country may also re-point core neutrals.
+   Kenya sets none of these, so .rg-theme-ke is unaffected.
+   ========================================================================== */
+
+.rg-theme-co {
+  /* Core neutrals re-pointed to Colombia's cooler, lighter ground */
+  --rg-bg: #fbfcfe;
+  --rg-surface: #ffffff;
+  --rg-surface-muted: #f4f8ff;
+  --rg-border: #e2e9f4;
+  --rg-border-strong: #cbd8ea;
+  --rg-text: #0f172a;
+  --rg-text-muted: #47566b;
+  --rg-text-subtle: #6b7a90;
+
+  --rg-primary: #0066ff;
+  --rg-primary-strong: #0f306f;
+  --rg-primary-deep: #0b2450;
+  --rg-primary-hover: #0052d6;
+  --rg-primary-soft: #e8f2ff;
+  --rg-primary-wash: #f4f8ff;
+  --rg-primary-line: #c5dcff;
+  --rg-on-primary: #ffffff;
+
+  /* Amarillo is the conversion accent. Yellow needs ink, not white, on it. */
+  --rg-accent: #ffc107;
+  --rg-accent-strong: #a9760a;
+  --rg-accent-hover: #f0b400;
+  --rg-accent-soft: #fff9ed;
+  --rg-accent-line: rgba(255, 193, 7, 0.38);
+  --rg-on-accent: #0f172a;
+
+  /* Result semantics: mint surface shared with Kenya as the "money" cue, but
+     the figure is set in ink here, per the Colombia guide. */
+  --rg-result-positive: #0f172a;
+  --rg-result-negative: #0f172a;
+  --rg-result-surface: #e4f6ed;
+  --rg-result-line: #cfe9dc;
+
+  --rg-focus: #0066ff;
+}
+
+/* Yellow CTA carries ink, so its shadow and hover need their own treatment. */
+.rg-theme-co .rg-btn--accent {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+}
+
+.rg-theme-co .rg-btn--lg {
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   COLOMBIA HERO — a horizon composition, not Kenya's left photo panel.
+   Bogotá spans the full width beneath the fold content; the copy sits on a
+   pale-blue ground rather than over the image.
+   -------------------------------------------------------------------------- */
+
+.rg-co-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 64px;
+  background:
+    radial-gradient(90% 70% at 78% 0%, #fff9ed 0%, transparent 58%),
+    linear-gradient(180deg, #eef5ff 0%, #f7faff 52%, var(--rg-bg) 100%);
+}
+
+.rg-co-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 56px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.rg-co-hero__band {
+  position: relative;
+  z-index: 1;
+  margin-top: 44px;
+  line-height: 0;
+}
+
+.rg-co-hero__band img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Dissolve the cutout's ragged edges into the ground */
+  mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+}
+
+/* Factual UVT / SMMLV strip — a Colombia-only hero element */
+.rg-co-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+.rg-co-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-left: 3px solid var(--rg-accent);
+  border-radius: var(--rg-r-sm);
+}
+
+.rg-co-stats dt,
+.rg-co-stats .rg-co-stats__k {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--rg-text-subtle);
+}
+
+.rg-co-stats .rg-co-stats__v {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--rg-primary-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Currency chip in the amount field, as drawn in the Colombia guide */
+.rg-co-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--rg-text-xs);
+  font-weight: 700;
+  color: var(--rg-primary-strong);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   COLOMBIA TRUST — mirrored against Kenya: artwork leads, copy follows.
+   -------------------------------------------------------------------------- */
+
+.rg-co-trust {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 48px;
+  align-items: center;
+  background:
+    radial-gradient(80% 100% at 0% 0%, #ffffff 0%, transparent 60%),
+    linear-gradient(135deg, #eef5ff, #e8f2ff);
+  border: 1px solid var(--rg-primary-line);
+  border-radius: var(--rg-r-2xl);
+  padding: 48px 52px;
+}
+
+.rg-co-trust__art {
+  position: relative;
+  order: -1;
+}
+
+.rg-co-trust__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 18px 36px rgba(15, 48, 111, 0.2));
+}
+
+.rg-co-trust h2 {
+  font-size: 1.75rem;
+  letter-spacing: -0.025em;
+}
+
+.rg-co-badge {
+  position: absolute;
+  right: -12px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 232px;
+  padding: 14px 18px;
+  background: var(--rg-surface);
+  border-radius: var(--rg-r-lg);
+  box-shadow: 0 10px 28px rgba(15, 48, 111, 0.18);
+}
+
+.rg-co-badge__t {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: var(--rg-text-body);
+}
+
+.rg-co-badge__d {
+  display: block;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-muted);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   COLOMBIA TOOLS — four real routes, so a four-up rhythm rather than 3x2.
+   -------------------------------------------------------------------------- */
+
+.rg-co-tools {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Colombia support module sits on crema with a yellow CTA */
+.rg-theme-co .rg-support {
+  background:
+    radial-gradient(70% 120% at 0% 100%, #ffffff 0%, transparent 60%),
+    linear-gradient(120deg, #fff9ed, #f4f8ff);
+  border-color: var(--rg-accent-line);
+}
+
+.rg-theme-co .rg-footer {
+  background: var(--rg-primary-strong);
+  color: #cfdcf0;
+}
+
+.rg-theme-co .rg-footer .rg-brand {
+  --rg-primary: #6ea8ff;
+  --rg-accent: #ffc107;
+}
+
+.rg-theme-co .rg-footer .rg-footer__desc { color: #a9bcd8; }
+.rg-theme-co .rg-footer .rg-footer__links a { color: #b3c6e0; }
+.rg-theme-co .rg-footer .rg-footer__links a:hover { color: #ffffff; }
+.rg-theme-co .rg-footer .rg-footer__bottom { border-top-color: rgba(255, 255, 255, 0.16); color: #9db2d0; }
+.rg-theme-co .rg-footer .rg-footer__disclaimer { color: #8ba3c4; }
+
+@media (max-width: 1180px) {
+  .rg-co-tools { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .rg-co-hero__grid { grid-template-columns: 1fr; gap: 36px; }
+  .rg-co-hero__band { margin-top: 28px; }
+  .rg-co-trust { grid-template-columns: 1fr; gap: 28px; padding: 32px; }
+  .rg-co-badge { position: static; max-width: none; margin-top: 16px; }
+}
+
+@media (max-width: 760px) {
+  .rg-co-hero { padding-top: 26px; }
+  .rg-co-hero__band { margin-top: 20px; }
+  .rg-co-hero__band img {
+    mask-image: none;
+    -webkit-mask-image: none;
+    border-radius: var(--rg-r-lg);
+  }
+  .rg-co-stats { gap: 8px; }
+  .rg-co-stats li { padding: 8px 12px; flex: 1 1 auto; }
+  .rg-co-tools { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* Checkbox row used by boolean calculator inputs (Colombia dependientes). */
+.rg-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rg-check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--rg-primary);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Colombia amounts are far longer than Kenya's ("$ 2.760.000" vs "KSh 69,579"),
+   so the result column takes more of the card and the figure steps down. */
+.rg-theme-co .rg-calc__body {
+  grid-template-columns: 0.76fr 1.24fr;
+}
+
+.rg-theme-co .rg-result__value {
+  font-size: clamp(1.625rem, 1rem + 1.7vw, 2.125rem);
+}
+
+.rg-theme-co .rg-result__net {
+  font-size: 1rem;
+}
+
+.rg-theme-co .rg-result__net dd {
+  font-size: 1.0625rem;
+}
+
+/* Base gravable card — sits under the inputs, clearly secondary */
+.rg-co-base {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px dashed var(--rg-border-strong);
+  border-radius: var(--rg-r-md);
+}
+
+.rg-co-base__k {
+  font-size: var(--rg-text-xs);
+  font-weight: 600;
+  color: var(--rg-text-subtle);
+}
+
+.rg-co-base__v {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--rg-text-muted);
+  letter-spacing: -0.015em;
+}
+
+.rg-co-base__u {
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+  margin-top: 2px;
+}
+
+@media (max-width: 760px) {
+  .rg-theme-co .rg-calc__body > .rg-co-base { order: 3; margin-top: 0; }
+}
+
+/* The Bogotá cutout is a horizon strip, not a full-bleed picture: cap its
+   height and crop to the skyline so it frames the fold instead of flooding it. */
+.rg-co-hero__band img {
+  height: clamp(190px, 20vw, 280px);
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+/* Give the amount field room — COP values are long and carry a currency chip. */
+.rg-theme-co .rg-calc__body {
+  grid-template-columns: 0.84fr 1.16fr;
+}
+
+.rg-theme-co .rg-field__control {
+  padding-inline: 14px;
+  gap: 6px;
+}
+
+.rg-co-trust__art .rg-co-badge {
+  right: auto;
+  left: 4px;
+  bottom: -6px;
+}
+
+@media (max-width: 760px) {
+  .rg-co-hero__band img {
+    height: 150px;
+    object-position: 50% 45%;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Three compact stats in one row so the result still reaches the fold. */
+  .rg-co-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .rg-co-stats li {
+    padding: 8px 10px;
+    border-left-width: 3px;
+  }
+
+  .rg-co-stats .rg-co-stats__k {
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+  }
+
+  .rg-co-stats .rg-co-stats__v {
+    font-size: 0.875rem;
+  }
+
+  .rg-theme-co .rg-hero__lead {
+    margin-bottom: 16px;
+  }
+}
