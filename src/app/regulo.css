@@ -2292,3 +2292,358 @@
     margin-bottom: 16px;
   }
 }
+
+/* ==========================================================================
+   COUNTRY THEME — MOROCCO (Arabic-first, RTL)
+   --------------------------------------------------------------------------
+   Palette from the supplied "الدليل البصري – المغرب":
+   الأحمر المغربي #E10600 · الأخضر العميق #006233 · البيج الكريمي #FFF6E9 ·
+   الوردي الفاتح #FFF0F1 · الرمادي الفاتح #F5F6F7 · اللون الداكن #111827.
+
+   Red drives actions; green carries money and positive results. Every rule in
+   this section is scoped to .rg-theme-ma or [dir="rtl"], so Kenya and Colombia
+   are untouched.
+   ========================================================================== */
+
+.rg-theme-ma {
+  --rg-font-display: var(--font-cairo), "Cairo", system-ui, sans-serif;
+  --rg-font-sans: var(--font-cairo), "Cairo", system-ui, sans-serif;
+
+  --rg-bg: #fbfbfc;
+  --rg-surface: #ffffff;
+  --rg-surface-muted: #fff6e9;
+  --rg-border: #eae7e2;
+  --rg-border-strong: #d8d3cc;
+  --rg-text: #111827;
+  --rg-text-muted: #4b5563;
+  --rg-text-subtle: #6b7280;
+
+  --rg-primary: #e10600;
+  --rg-primary-strong: #b00500;
+  --rg-primary-deep: #7d0300;
+  --rg-primary-hover: #c50500;
+  --rg-primary-soft: #fff0f1;
+  --rg-primary-wash: #fff7f7;
+  --rg-primary-line: #f7d2d2;
+  --rg-on-primary: #ffffff;
+
+  --rg-accent: #006233;
+  --rg-accent-strong: #004f29;
+  --rg-accent-hover: #00753d;
+  --rg-accent-soft: #e9f2ec;
+  --rg-accent-line: rgba(0, 98, 51, 0.24);
+  --rg-on-accent: #ffffff;
+
+  /* The guide sets the result figure in deep green on a light grey card. */
+  --rg-result-positive: #006233;
+  --rg-result-negative: #111827;
+  --rg-result-surface: #f5f6f7;
+  --rg-result-line: #e4e6e8;
+
+  --rg-focus: #e10600;
+
+  line-height: 1.75; /* Arabic needs more leading than Latin */
+}
+
+/* The corporate wordmark stays Latin across every country. */
+.rg-theme-ma .rg-brand__word {
+  font-family: var(--font-sora), "Sora", system-ui, sans-serif;
+}
+
+/* Mark keeps its geometry; Morocco maps green to the body and red to the fold,
+   matching the supplied Regulo Morocco logo. */
+.rg-theme-ma .rg-brand {
+  --rg-primary: #006233;
+  --rg-accent: #e10600;
+}
+
+.rg-theme-ma .rg-footer {
+  background: var(--rg-primary-deep);
+  color: #f0d9d8;
+}
+.rg-theme-ma .rg-footer .rg-brand { --rg-primary: #ffffff; --rg-accent: #ff8f8b; }
+.rg-theme-ma .rg-footer .rg-footer__desc { color: #e0b9b7; }
+.rg-theme-ma .rg-footer .rg-footer__links a { color: #e6c4c2; }
+.rg-theme-ma .rg-footer .rg-footer__links a:hover { color: #ffffff; }
+.rg-theme-ma .rg-footer .rg-footer__bottom { border-top-color: rgba(255,255,255,0.18); color: #d9adab; }
+.rg-theme-ma .rg-footer .rg-footer__disclaimer { color: #cb9a98; }
+
+/* --------------------------------------------------------------------------
+   RTL — scoped to [dir="rtl"] so LTR countries never see these rules.
+   -------------------------------------------------------------------------- */
+
+/* Native select chevron belongs on the line-end side, which is left in RTL. */
+[dir="rtl"] .rg-field select {
+  background-position: left 16px center;
+  padding-right: 18px;
+  padding-left: 44px;
+}
+
+/* Directional glyphs must point toward reading-forward, i.e. left in RTL. */
+[dir="rtl"] .rg-btn svg,
+[dir="rtl"] .rg-tool__cta svg {
+  transform: scaleX(-1);
+}
+
+/* Chevrons that indicate open/close are vertical — leave them alone. */
+[dir="rtl"] .rg-advanced__toggle svg,
+[dir="rtl"] .rg-field select + svg {
+  transform: none;
+}
+
+[dir="rtl"] .rg-advanced__toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* Amounts and Latin abbreviations must not reflow into the Arabic run. */
+.rg-num {
+  unicode-bidi: isolate;
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   MOROCCO HERO — photo anchored to the line-end (left) side, copy leads from
+   the right where Arabic reading starts.
+   -------------------------------------------------------------------------- */
+
+.rg-ma-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 64px;
+  background:
+    radial-gradient(80% 70% at 100% 0%, var(--rg-primary-soft) 0%, transparent 58%),
+    linear-gradient(180deg, #fffaf2 0%, var(--rg-bg) 76%);
+}
+
+.rg-ma-hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 52px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.rg-ma-hero__art {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 46%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(90deg, #000 0%, #000 54%, transparent 96%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 54%, transparent 96%);
+}
+
+.rg-ma-hero__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 250, 242, 0) 0%,
+    rgba(255, 250, 242, 0.1) 34%,
+    rgba(255, 250, 242, 0.55) 66%,
+    rgba(255, 250, 242, 0.92) 100%
+  );
+}
+
+/* Zellij-inspired geometric band: an eight-point star lattice, used once. */
+.rg-ma-motif {
+  height: 14px;
+  background-image:
+    linear-gradient(45deg, var(--rg-primary) 25%, transparent 25%, transparent 75%, var(--rg-primary) 75%),
+    linear-gradient(45deg, var(--rg-accent) 25%, transparent 25%, transparent 75%, var(--rg-accent) 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 7px 7px;
+  opacity: 0.5;
+}
+
+.rg-ma-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+.rg-ma-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-inline-start: 3px solid var(--rg-accent);
+  border-radius: var(--rg-r-sm);
+}
+
+.rg-ma-stats__k {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rg-text-subtle);
+}
+
+.rg-ma-stats__v {
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--rg-primary-strong);
+}
+
+/* Small "this page is in French" cue on cards that leave the Arabic homepage */
+.rg-ma-fr {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-inline-start: 8px;
+  padding: 1px 7px;
+  border: 1px solid var(--rg-border-strong);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--rg-text-subtle);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   MOROCCO TRUST — artwork is the dominant half, copy sits beside it.
+   -------------------------------------------------------------------------- */
+
+.rg-ma-trust {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 44px;
+  align-items: center;
+  background:
+    radial-gradient(70% 100% at 100% 0%, #ffffff 0%, transparent 62%),
+    linear-gradient(135deg, var(--rg-primary-soft), #fff6e9);
+  border: 1px solid var(--rg-primary-line);
+  border-radius: var(--rg-r-2xl);
+  padding: 44px 48px;
+}
+
+.rg-ma-trust__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 16px 34px rgba(125, 3, 0, 0.18));
+}
+
+.rg-ma-trust h2 { font-size: 1.75rem; }
+
+/* Real deduction concepts (CNSS / AMO) shown as explainer tiles, not as fake
+   standalone calculators — no such routes exist. */
+.rg-ma-concepts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+}
+
+.rg-ma-concepts li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-md);
+}
+
+.rg-ma-concepts img { flex-shrink: 0; }
+
+.rg-ma-concepts b { display: block; font-size: var(--rg-text-sm); }
+.rg-ma-concepts span { font-size: var(--rg-text-xs); color: var(--rg-text-muted); }
+
+.rg-ma-tools {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rg-theme-ma .rg-support {
+  background:
+    radial-gradient(70% 120% at 100% 100%, #ffffff 0%, transparent 60%),
+    linear-gradient(120deg, #fff6e9, var(--rg-primary-soft));
+  border-color: var(--rg-primary-line);
+}
+
+@media (max-width: 1180px) {
+  .rg-ma-tools { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .rg-ma-hero__grid { grid-template-columns: 1fr; gap: 32px; }
+  .rg-ma-hero__art { position: relative; inset: auto; width: 100%; height: 168px; border-radius: var(--rg-r-lg); mask-image: none; -webkit-mask-image: none; }
+  .rg-ma-hero__art::after { display: none; }
+  .rg-ma-trust { grid-template-columns: 1fr; gap: 26px; padding: 30px; }
+}
+
+@media (max-width: 760px) {
+  .rg-ma-hero { padding-top: 24px; }
+  .rg-ma-hero__art { height: 136px; }
+  .rg-ma-tools { grid-template-columns: 1fr; gap: 12px; }
+  .rg-ma-concepts { grid-template-columns: 1fr; }
+  .rg-ma-stats li { flex: 1 1 auto; padding: 8px 12px; }
+}
+
+/* Arabic amounts carry the currency word inline ("15,508 درهم"), so the result
+   column needs more room and a smaller display size than the Latin countries. */
+.rg-theme-ma .rg-calc__body {
+  grid-template-columns: 0.78fr 1.22fr;
+}
+
+.rg-theme-ma .rg-result__value {
+  font-size: clamp(1.5rem, 1rem + 1.4vw, 2rem);
+  line-height: 1.3;
+}
+
+.rg-theme-ma .rg-result__net {
+  font-size: var(--rg-text-body);
+}
+
+.rg-theme-ma .rg-result__net dd {
+  font-size: 1rem;
+}
+
+/* Softer zellij band — the hard checker read as noise at full strength. */
+.rg-ma-motif {
+  height: 10px;
+  opacity: 0.28;
+}
+
+/* Morocco reserves red for actions and green for money, so the support CTA
+   takes the primary red rather than the accent green. */
+.rg-theme-ma .rg-support .rg-btn--accent {
+  background: var(--rg-primary);
+  color: var(--rg-on-primary);
+  box-shadow: 0 8px 20px rgba(225, 6, 0, 0.3);
+}
+
+.rg-theme-ma .rg-support .rg-btn--accent:hover {
+  background: var(--rg-primary-hover);
+}
+
+.rg-theme-ma .rg-support__points svg {
+  color: var(--rg-accent);
+}
+
+@media (max-width: 760px) {
+  .rg-ma-hero__art { height: 118px; }
+  .rg-ma-hero__grid { gap: 22px; }
+  .rg-theme-ma .rg-hero__lead { margin-bottom: 14px; }
+  .rg-ma-stats { margin-bottom: 16px; }
+  .rg-ma-stats li { padding: 7px 11px; }
+  .rg-ma-stats__k { font-size: 0.6875rem; }
+  .rg-ma-stats__v { font-size: 0.9375rem; }
+}

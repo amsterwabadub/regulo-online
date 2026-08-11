@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Sora, Public_Sans } from 'next/font/google';
+import { Sora, Public_Sans, Cairo } from 'next/font/google';
 import './globals.css';
 import './regulo.css';
 import Header from '@/components/Header';
@@ -13,6 +13,16 @@ const sora = Sora({
   subsets: ['latin'],
   weight: ['600', '700', '800'],
   variable: '--font-sora',
+  display: 'swap',
+});
+
+// Arabic UI face for the Morocco subtree. The supplied style guide specifies
+// "Baghdad", a macOS system font that cannot be shipped as a webfont; Cairo is
+// the closest high-quality distributable equivalent.
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-cairo',
   display: 'swap',
 });
 
@@ -67,7 +77,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
   return (
-    <html lang="en" className={`${sora.variable} ${publicSans.variable}`}>
+    <html lang="en" className={`${sora.variable} ${publicSans.variable} ${cairo.variable}`}>
       <body>
         <GoogleAnalytics gaId={gaId} />
         <GlobalChrome>

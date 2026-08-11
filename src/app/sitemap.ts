@@ -38,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      // Morocco country homepage — Arabic hub for the French /ma long-tail routes.
+      url: `${baseUrl}/ma`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/politica-de-privacidade`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
