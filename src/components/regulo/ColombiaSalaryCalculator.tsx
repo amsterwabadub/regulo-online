@@ -10,6 +10,7 @@ import {
   trackCalculatorStart,
   trackCalculatorComplete,
   trackResultView,
+  getSalaryBand,
 } from '@/lib/analytics';
 import { IconChevronDown, IconArrowRight, IconAlert } from './Icons';
 
@@ -78,9 +79,11 @@ export default function ColombiaSalaryCalculator() {
     // Only after a genuine interaction. Firing on mount would make
     // calculator_complete a page-load proxy rather than a funnel step.
     if (!config || !hasStarted || grossInvalid) return;
-    trackCalculatorComplete(config.countryCode, config.id, pathname);
+    // Band only — the exact figure is never sent.
+    const band = getSalaryBand(Number(grossDigits) || 0, config.currencyCode);
+    trackCalculatorComplete(config.countryCode, config.id, pathname, { salary_band: band });
     trackResultView(config.countryCode, config.id, pathname);
-    }, [netValue, config, pathname, grossInvalid, hasStarted]);
+    }, [netValue, config, pathname, grossInvalid, hasStarted, grossDigits]);
 
   if (!config || !result) {
     return <div className="rg-calc">No se encontró la configuración de Colombia.</div>;

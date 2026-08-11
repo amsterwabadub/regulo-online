@@ -10,6 +10,7 @@ import {
   trackCalculatorStart,
   trackCalculatorComplete,
   trackResultView,
+  getSalaryBand,
 } from '@/lib/analytics';
 import { IconChevronDown, IconArrowRight, IconAlert, IconCheck, IconShieldCheck } from './Icons';
 
@@ -69,9 +70,11 @@ export default function MexicoAguinaldoCalculator() {
     // Only after a genuine interaction. Firing on mount would make
     // calculator_complete a page-load proxy rather than a funnel step.
     if (!config || !hasStarted || salaryInvalid) return;
-    trackCalculatorComplete(config.countryCode, config.id, pathname);
+    // Band only — the exact figure is never sent.
+    const band = getSalaryBand(Number(salaryDigits) || 0, config.currencyCode);
+    trackCalculatorComplete(config.countryCode, config.id, pathname, { salary_band: band });
     trackResultView(config.countryCode, config.id, pathname);
-    }, [netValue, config, pathname, salaryInvalid, hasStarted]);
+    }, [netValue, config, pathname, salaryInvalid, hasStarted, salaryDigits]);
 
   if (!config || !result) {
     return <div className="rg-calc">No se encontró la configuración de México.</div>;
