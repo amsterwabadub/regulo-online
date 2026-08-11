@@ -34,6 +34,9 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
+  // Yandex Webmaster ownership verification. The host was registered against the
+  // existing shared Operator Ventures grant; this only proves ownership.
+  verification: { yandex: '646cbdcf7b69dbcc' },
   metadataBase: new URL('https://regulo.online'),
   title: {
     default: 'Regulo — Global Statutory & Payroll Calculators 2026',
@@ -75,11 +78,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+  // Yandex Metrika counter for regulo.online, created in the existing Operator
+  // Ventures Metrika account. Env-overridable; no secret involved.
+  const ymId = process.env.NEXT_PUBLIC_YM_ID || '111495493';
 
   return (
     <html lang="en" className={`${sora.variable} ${publicSans.variable} ${cairo.variable}`}>
       <body>
         <GoogleAnalytics gaId={gaId} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+              ym(${ymId}, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+            `,
+          }}
+        />
+        <noscript>
+          <div>
+            <img src={`https://mc.yandex.ru/watch/${ymId}`} style={{ position: 'absolute', left: '-9999px' }} alt="" />
+          </div>
+        </noscript>
         <GlobalChrome>
           <Header />
         </GlobalChrome>
