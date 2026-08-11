@@ -75,10 +75,12 @@ export default function ColombiaSalaryCalculator() {
   const netValue = pick(result as CalculationResult, 'net_takehome')?.value ?? 0;
 
   useEffect(() => {
-    if (!config || grossInvalid) return;
+    // Only after a genuine interaction. Firing on mount would make
+    // calculator_complete a page-load proxy rather than a funnel step.
+    if (!config || !hasStarted || grossInvalid) return;
     trackCalculatorComplete(config.countryCode, config.id, pathname);
     trackResultView(config.countryCode, config.id, pathname);
-  }, [netValue, config, pathname, grossInvalid]);
+    }, [netValue, config, pathname, grossInvalid, hasStarted]);
 
   if (!config || !result) {
     return <div className="rg-calc">No se encontró la configuración de Colombia.</div>;

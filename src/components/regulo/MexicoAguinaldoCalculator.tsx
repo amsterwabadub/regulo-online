@@ -66,10 +66,12 @@ export default function MexicoAguinaldoCalculator() {
   const netValue = result?.heroOutput.value ?? 0;
 
   useEffect(() => {
-    if (!config || salaryInvalid) return;
+    // Only after a genuine interaction. Firing on mount would make
+    // calculator_complete a page-load proxy rather than a funnel step.
+    if (!config || !hasStarted || salaryInvalid) return;
     trackCalculatorComplete(config.countryCode, config.id, pathname);
     trackResultView(config.countryCode, config.id, pathname);
-  }, [netValue, config, pathname, salaryInvalid]);
+    }, [netValue, config, pathname, salaryInvalid, hasStarted]);
 
   if (!config || !result) {
     return <div className="rg-calc">No se encontró la configuración de México.</div>;

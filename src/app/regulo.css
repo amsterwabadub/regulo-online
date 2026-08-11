@@ -3128,3 +3128,13 @@
   .rg-theme-mx .rg-hero__title { max-width: none; }
   .rg-mx-hero__art { max-height: 190px; }
 }
+
+/* ---- commercial CTA (first measurable commercial surface) ---------------- */
+.rg-commercial {
+  margin-top: 20px; padding: 20px 22px;
+  background: var(--rg-surface-alt, #f7faf8);
+  border: 1px dashed var(--rg-border, #dfe5e1);
+  border-radius: 14px; text-align: center;
+}
+.rg-commercial__blurb { font-size: .95rem; color: var(--rg-text-muted); margin-bottom: 12px; }
+.rg-commercial__pending { margin-top: 10px; font-size: .78rem; color: var(--rg-text-muted); opacity: .85; }

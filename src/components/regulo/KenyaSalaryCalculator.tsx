@@ -82,11 +82,13 @@ export default function KenyaSalaryCalculator() {
   const heroValue = result?.heroOutput.value ?? 0;
 
   useEffect(() => {
-    if (!config || grossInvalid) return;
+    // Only after a genuine interaction. Firing on mount would make
+    // calculator_complete a page-load proxy rather than a funnel step.
+    if (!config || !hasStarted || grossInvalid) return;
     trackCalculatorComplete(config.countryCode, config.id, pathname);
     trackResultView(config.countryCode, config.id, pathname);
     // Keyed on the computed figure so a settled result reports once, not per render.
-  }, [heroValue, config, pathname, grossInvalid]);
+  }, [heroValue, config, pathname, grossInvalid, hasStarted]);
 
   if (!config || !result) {
     return <div className="rg-calc">Kenya calculator configuration not found.</div>;

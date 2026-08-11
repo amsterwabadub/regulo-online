@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import CountryHeader from '@/components/regulo/CountryHeader';
 import CountryFooter from '@/components/regulo/CountryFooter';
 import KenyaSalaryCalculator from '@/components/regulo/KenyaSalaryCalculator';
+import CommercialCTA from '@/components/regulo/CommercialCTA';
 import SectionHeading from '@/components/regulo/SectionHeading';
 import HowItWorks from '@/components/regulo/HowItWorks';
 import ToolCard from '@/components/regulo/ToolCard';
@@ -275,6 +276,7 @@ export default function KenyaHomePage() {
               </div>
 
               <KenyaSalaryCalculator />
+            <CommercialCTA market="ke" calculatorId="kenya-net-salary" pagePath="/ke" />
             </div>
           </div>
         </section>

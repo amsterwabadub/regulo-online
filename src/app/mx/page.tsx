@@ -9,6 +9,7 @@ import StructuredData from '@/components/StructuredData';
 import CountryHeader from '@/components/regulo/CountryHeader';
 import CountryFooter from '@/components/regulo/CountryFooter';
 import MexicoAguinaldoCalculator from '@/components/regulo/MexicoAguinaldoCalculator';
+import CommercialCTA from '@/components/regulo/CommercialCTA';
 import SectionHeading from '@/components/regulo/SectionHeading';
 import HowItWorks from '@/components/regulo/HowItWorks';
 import SupportCTA from '@/components/regulo/SupportCTA';
@@ -247,6 +248,7 @@ export default function MexicoHomePage() {
             </div>
 
             <MexicoAguinaldoCalculator />
+            <CommercialCTA market="mx" calculatorId="mexico-aguinaldo" pagePath="/mx" />
           </div>
         </section>
 

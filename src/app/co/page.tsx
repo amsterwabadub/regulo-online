@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import CountryHeader from '@/components/regulo/CountryHeader';
 import CountryFooter from '@/components/regulo/CountryFooter';
 import ColombiaSalaryCalculator from '@/components/regulo/ColombiaSalaryCalculator';
+import CommercialCTA from '@/components/regulo/CommercialCTA';
 import SectionHeading from '@/components/regulo/SectionHeading';
 import HowItWorks from '@/components/regulo/HowItWorks';
 import ToolCard from '@/components/regulo/ToolCard';
@@ -247,6 +248,7 @@ export default function ColombiaHomePage() {
               </div>
 
               <ColombiaSalaryCalculator />
+            <CommercialCTA market="co" calculatorId="colombia-retefuente" pagePath="/co" />
             </div>
           </div>
 
