@@ -2798,3 +2798,333 @@
     max-width: none;
   }
 }
+
+/* ==========================================================================
+   COUNTRY THEME — MEXICO
+   --------------------------------------------------------------------------
+   Palette verbatim from "Regulo México — Guía de estilo":
+   Verde Regulo #0F5132 · Esmeralda #10B981 · Rojo México #E11D48 ·
+   Crema cálida #FFF7E6 · Menta suave #F2FBF6 · Tinta oscura #0F172A ·
+   Gris medio #64748B.
+
+   Deliberate deviations from that guide, for family consistency:
+   its Inter type and serif leaf logo are not adopted — Mexico keeps the
+   approved Regulo mark and the shared Sora / Public Sans pairing.
+   ========================================================================== */
+
+.rg-theme-mx {
+  --rg-bg: #fdfdfb;
+  --rg-surface: #ffffff;
+  --rg-surface-muted: #fff7e6;
+  --rg-border: #e6e8e4;
+  --rg-border-strong: #cdd3cc;
+  --rg-text: #0f172a;
+  --rg-text-muted: #4a5568;
+  --rg-text-subtle: #64748b;
+
+  --rg-primary: #0f5132;
+  --rg-primary-strong: #0b3d26;
+  --rg-primary-deep: #082b1b;
+  --rg-primary-hover: #14663f;
+  --rg-primary-soft: #f2fbf6;
+  --rg-primary-wash: #f7fdfa;
+  --rg-primary-line: #cbe7d8;
+  --rg-on-primary: #ffffff;
+
+  --rg-accent: #e11d48;
+  --rg-accent-strong: #b3153a;
+  --rg-accent-hover: #c8163f;
+  --rg-accent-soft: #fff1f4;
+  --rg-accent-line: rgba(225, 29, 72, 0.22);
+  --rg-on-accent: #ffffff;
+
+  /* Esmeralda carries the positive figure; Rojo México the deductions. */
+  --rg-result-positive: #0f5132;
+  --rg-result-negative: #e11d48;
+  --rg-result-surface: #f2fbf6;
+  --rg-result-line: #d8ece1;
+
+  --rg-focus: #0f5132;
+}
+
+.rg-theme-mx .rg-brand { --rg-primary: #0f5132; --rg-accent: #e11d48; }
+
+/* Outlined secondary button, as drawn in the Mexico guide. */
+.rg-theme-mx .rg-btn--outline {
+  background: var(--rg-surface);
+  color: var(--rg-primary);
+  border: 1.5px solid var(--rg-primary);
+  box-shadow: none;
+}
+
+.rg-theme-mx .rg-btn--outline:hover {
+  background: var(--rg-primary-soft);
+  color: var(--rg-primary);
+}
+
+/* --------------------------------------------------------------------------
+   MEXICO HERO — a centred, editorial opening: the copy sits above a wide
+   calculator, rather than the side-by-side split used by the other countries.
+   -------------------------------------------------------------------------- */
+
+.rg-mx-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 60px;
+  background:
+    radial-gradient(70% 60% at 50% 0%, var(--rg-surface-muted) 0%, transparent 62%),
+    linear-gradient(180deg, #fbfdf9 0%, var(--rg-bg) 70%);
+}
+
+.rg-mx-hero__top {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.rg-mx-hero__art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--rg-r-2xl);
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(15, 81, 50, 0.18);
+}
+
+.rg-mx-hero__art img { object-fit: cover; }
+
+.rg-mx-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.rg-mx-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-radius: var(--rg-r-sm);
+}
+
+.rg-mx-stats__k {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rg-text-subtle);
+}
+
+.rg-mx-stats__v {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--rg-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   MEXICO RESULT — the guide's two-column card: figure at left, itemised
+   deductions at right, split by a dashed rule.
+   -------------------------------------------------------------------------- */
+
+.rg-theme-mx .rg-calc__body {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+.rg-mx-result {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 26px;
+  align-items: center;
+  background: var(--rg-result-surface);
+  border: 1px solid var(--rg-result-line);
+  border-radius: var(--rg-r-lg);
+  padding: 26px 24px;
+}
+
+.rg-mx-result__figure {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rg-mx-result__label {
+  font-size: var(--rg-text-sm);
+  font-weight: 600;
+  color: var(--rg-text-muted);
+}
+
+.rg-mx-result__value {
+  font-family: var(--rg-font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1.1rem + 1.9vw, 2.375rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--rg-result-positive);
+  white-space: nowrap;
+}
+
+.rg-mx-result__unit {
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+}
+
+.rg-mx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #d7f0e3;
+  color: var(--rg-primary-strong);
+  font-size: var(--rg-text-xs);
+  font-weight: 700;
+}
+
+.rg-mx-result__rows {
+  border-inline-start: 1px dashed var(--rg-border-strong);
+  padding-inline-start: 24px;
+  margin: 0;
+}
+
+.rg-mx-result__rows > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  font-size: var(--rg-text-sm);
+  border-bottom: 1px solid var(--rg-result-line);
+}
+
+.rg-mx-result__rows > div:last-child {
+  border-bottom: none;
+  padding-top: 12px;
+  font-weight: 800;
+  font-size: var(--rg-text-body);
+}
+
+.rg-mx-result__rows dt { color: var(--rg-text-muted); }
+.rg-mx-result__rows dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rg-mx-result__rows dd.is-neg { color: var(--rg-result-negative); }
+.rg-mx-result__rows dd.is-pos { color: var(--rg-primary); }
+.rg-mx-result__rows > div:last-child dt { color: var(--rg-text); }
+.rg-mx-result__rows > div:last-child dd { color: var(--rg-result-positive); font-family: var(--rg-font-display); font-size: 1.0625rem; }
+
+.rg-mx-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: var(--rg-text-xs);
+  color: var(--rg-text-subtle);
+  line-height: 1.5;
+}
+
+.rg-mx-note svg { color: var(--rg-primary); flex-shrink: 0; margin-top: 1px; }
+
+.rg-mx-tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rg-mx-trust {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 44px;
+  align-items: center;
+  background:
+    radial-gradient(70% 100% at 0% 0%, #ffffff 0%, transparent 60%),
+    linear-gradient(135deg, var(--rg-primary-soft), var(--rg-surface-muted));
+  border: 1px solid var(--rg-primary-line);
+  border-radius: var(--rg-r-2xl);
+  padding: 44px 48px;
+}
+
+.rg-mx-trust h2 { font-size: 1.75rem; letter-spacing: -0.025em; }
+.rg-mx-trust__art img { width: 100%; height: auto; display: block; filter: drop-shadow(0 16px 34px rgba(15, 81, 50, 0.2)); }
+
+.rg-theme-mx .rg-support {
+  background:
+    radial-gradient(70% 120% at 100% 100%, #ffffff 0%, transparent 60%),
+    linear-gradient(120deg, var(--rg-surface-muted), var(--rg-primary-soft));
+  border-color: var(--rg-primary-line);
+}
+
+.rg-theme-mx .rg-footer { background: var(--rg-primary-deep); color: #cfe0d6; }
+.rg-theme-mx .rg-footer .rg-brand { --rg-primary: #ffffff; --rg-accent: #ff6b8a; }
+.rg-theme-mx .rg-footer .rg-footer__desc { color: #a6c2b3; }
+.rg-theme-mx .rg-footer .rg-footer__links a { color: #b3cdbe; }
+.rg-theme-mx .rg-footer .rg-footer__links a:hover { color: #ffffff; }
+.rg-theme-mx .rg-footer .rg-footer__bottom { border-top-color: rgba(255,255,255,0.15); color: #9bbaab; }
+.rg-theme-mx .rg-footer .rg-footer__disclaimer { color: #8aab9b; }
+
+@media (max-width: 1180px) {
+  .rg-mx-tools { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .rg-mx-hero__top { grid-template-columns: 1fr; gap: 28px; }
+  .rg-mx-trust { grid-template-columns: 1fr; gap: 26px; padding: 32px; }
+  .rg-mx-trust__art { max-width: 460px; margin-inline: auto; }
+}
+
+@media (max-width: 760px) {
+  .rg-mx-hero { padding-top: 24px; }
+  .rg-mx-hero__art { aspect-ratio: 16 / 11; border-radius: var(--rg-r-lg); }
+  .rg-mx-result { grid-template-columns: 1fr; gap: 18px; padding: 22px 18px; }
+  .rg-mx-result__rows { border-inline-start: none; padding-inline-start: 0; border-top: 1px dashed var(--rg-border-strong); padding-top: 8px; }
+  .rg-mx-tools { grid-template-columns: 1fr; gap: 12px; }
+  .rg-mx-stats li { flex: 1 1 auto; padding: 8px 12px; }
+  .rg-mx-trust__art { max-width: 320px; }
+}
+
+/* Bring the calculator into the first viewport: the stacked Mexico hero needs
+   a tighter opening than the side-by-side countries. */
+.rg-theme-mx .rg-hero__title {
+  font-size: clamp(1.75rem, 1.05rem + 2.4vw, 2.75rem);
+  line-height: 1.08;
+  max-width: 12ch;
+  margin-bottom: 16px;
+}
+
+.rg-theme-mx .rg-hero__lead {
+  margin-bottom: 20px;
+  max-width: 32em;
+}
+
+.rg-mx-hero {
+  padding-top: 44px;
+}
+
+.rg-mx-hero__top {
+  gap: 40px;
+  margin-bottom: 28px;
+}
+
+.rg-mx-hero__art {
+  aspect-ratio: 16 / 9;
+  max-height: 340px;
+}
+
+.rg-theme-mx .rg-feature-row {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .rg-theme-mx .rg-hero__title { max-width: none; }
+  .rg-mx-hero__art { max-height: 190px; }
+}
