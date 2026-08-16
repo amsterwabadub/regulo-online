@@ -13,8 +13,16 @@ declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
     dataLayer?: unknown[];
+    ym?: (...args: any[]) => void;
   }
 }
+
+/**
+ * Yandex Metrika counter — the same expression app/layout.tsx uses for
+ * `ym(<id>, "init", …)`. NEXT_PUBLIC_* is inlined at build time, so this is the
+ * identical value on the client.
+ */
+const YM_ID = Number(process.env.NEXT_PUBLIC_YM_ID || '111495493');
 
 export type GAEventName =
   | 'calculator_view'
@@ -43,10 +51,20 @@ function dataLayerPush(..._args: unknown[]) {
   window.dataLayer.push(arguments);
 }
 
+/**
+ * One user action, both stacks.
+ *
+ * Until now this pushed to `window.dataLayer` only, so counter 111495493
+ * received page traffic but could never record a product event — it had zero
+ * goals and zero goal reaches while GA4 counted 32 calculator_complete. The
+ * Metrika send is added here, at the single existing call site, so no business
+ * logic is duplicated and no caller changes.
+ */
 export const trackGA4Event = (eventName: GAEventName, params: GAEventParams) => {
   if (typeof window === 'undefined') return;
   // Never send exact salary, deduction or tax values — only bands and ids.
   dataLayerPush('event', eventName, { ...params });
+  if (YM_ID) window.ym?.(YM_ID, 'reachGoal', eventName, { ...params });
 };
 
 /** Coarse, non-identifying salary band. Never the exact figure. */
