@@ -60,12 +60,21 @@ export default function HomePage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
                   <span style={{ fontSize: '2.25rem' }}>{country.flag}</span>
                   <div>
-                    <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>
-                      {country.name}
+                    {/* The /{code} hub is the country's main calculator page, but it was
+                        only ever named here as plain text — every link pointed past it to a
+                        satellite. URL Inspection confirmed the result: all four hubs were
+                        "unknown to Google" while sitting in a sitemap Google had read. */}
+                    <h2 style={{ fontSize: '1.35rem', fontWeight: 800 }}>
+                      <Link href={`/${country.code}`} style={{ color: 'var(--color-brand-primary)', textDecoration: 'none' }}>
+                        {country.name}
+                      </Link>
                     </h2>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--color-brand-accent)', fontWeight: 700 }}>
-                      Primary Domain: /{country.code}/
-                    </span>
+                    <Link
+                      href={`/${country.code}`}
+                      style={{ fontSize: '0.8rem', color: 'var(--color-brand-accent)', fontWeight: 700, textDecoration: 'none' }}
+                    >
+                      {country.popularSearch} →
+                    </Link>
                   </div>
                 </div>
 
@@ -103,7 +112,7 @@ export default function HomePage() {
               </div>
 
               <Link
-                href={`/${country.code}/${country.primarySlug}`}
+                href={`/${country.code}`}
                 className="btn btn-primary"
                 style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
               >
