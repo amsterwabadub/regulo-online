@@ -160,8 +160,7 @@ export const MEXICO_CALCULATOR_CONFIG: CalculatorConfig = {
       defaultValue: 'february2026_onward',
       options: [
         { value: 'february2026_onward', label: 'Febrero - Diciembre 2026 (UMA 2026 = $117.31 MXN / 30 UMA = $3,519.30 MXN)' },
-        { value: 'january2026', label: 'Enero 2026 (UMA 2025 = $113.14 MXN / 30 UMA = $3,394.20 MXN)' },
-      ],
+          ],
       helpText: 'Conforme a la Constitución y Ley de UMA, el valor oficial entra en vigor el 1 de febrero de cada año.',
     },
   ],
@@ -211,8 +210,7 @@ Cualquier excedente sobre $3,519.30 MXN formará la **Base Gravable** a la que s
         { title: 'Calculadora Aguinaldo Neto 2026', href: '/mx/aguinaldo-neto-calculadora-2026' },
         { title: 'Calculadora ISR Aguinaldo', href: '/mx/isr-aguinaldo-calculator' },
         { title: 'Salario Neto México', href: '/mx/salario-neto-mexico' },
-        { title: 'Calculadora ISR México', href: '/mx/calculadora-isr-mexico' },
-      ],
+          ],
     },
     'aguinaldo-neto-calculadora-2026': {
       slug: 'aguinaldo-neto-calculadora-2026',
@@ -233,8 +231,7 @@ Ingresa tu salario base y obtén el desglose detallado de lo que recibirás depo
         },
       ],
       relatedPages: [
-        { title: 'Calculadora Principal', href: '/mx/aguinaldo-calculator' },
-      ],
+          ],
     },
     'isr-aguinaldo-calculator': {
       slug: 'isr-aguinaldo-calculator',
@@ -277,8 +274,7 @@ Conoce la diferencia entre lo que pactas en tu contrato laboral y lo que realmen
         },
       ],
       relatedPages: [
-        { title: 'Calculadora Principal Aguinaldo', href: '/mx/aguinaldo-calculator' },
-      ],
+          ],
     },
     'calculadora-isr-mexico': {
       slug: 'calculadora-isr-mexico',

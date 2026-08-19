@@ -274,8 +274,7 @@ Con la base gravable expresada en UVT (Base en COP / Valor UVT 2026 de **$52,374
       relatedPages: [
         { title: 'Calculadora Retefuente 2026', href: '/co/retefuente-calculadora-2026' },
         { title: 'Calculadora UVT Colombia', href: '/co/uvt-calculator' },
-        { title: 'Salario Neto Colombia 2026', href: '/co/salario-neto-colombia' },
-      ],
+          ],
     },
     'retefuente-calculadora-2026': {
       slug: 'retefuente-calculadora-2026',
@@ -296,8 +295,7 @@ Calcula mes a mes la retención aplicando la UVT oficial 2026 ($52,374 COP) y la
         },
       ],
       relatedPages: [
-        { title: 'Calculadora Principal', href: '/co/retefuente-calculadora' },
-      ],
+          ],
     },
     'uvt-calculator': {
       slug: 'uvt-calculator',
@@ -318,8 +316,7 @@ Fijado en **$52,374 COP** por la DIAN (Resolución 000238 del 15 de diciembre de
         },
       ],
       relatedPages: [
-        { title: 'Calculadora Principal', href: '/co/retefuente-calculadora' },
-      ],
+          ],
     },
     'salario-neto-colombia': {
       slug: 'salario-neto-colombia',

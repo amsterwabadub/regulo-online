@@ -289,8 +289,7 @@ PAYE is charged on Taxable Base (Gross Salary minus allowable NSSF and pension d
         { title: 'Salary After Tax Kenya', href: '/ke/salary-after-tax-kenya' },
         { title: 'PAYE Tax Calculator Kenya', href: '/ke/paye-calculator-kenya' },
         { title: 'SHIF Calculator Kenya 2026', href: '/ke/shif-calculator-kenya' },
-        { title: 'Housing Levy Calculator Kenya', href: '/ke/housing-levy-calculator-kenya' },
-      ],
+          ],
     },
     'kenya-net-salary-calculator-2026': {
       slug: 'kenya-net-salary-calculator-2026',
@@ -335,8 +334,7 @@ Your salary after tax is your final disposable income after all legal statutory 
       ],
       relatedPages: [
         { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
-        { title: 'SHIF Calculator Kenya', href: '/ke/shif-calculator-kenya' },
-      ],
+          ],
     },
     'paye-calculator-kenya': {
       slug: 'paye-calculator-kenya',
@@ -380,8 +378,7 @@ SHIF replaced NHIF under the Social Health Insurance Act. It imposes a 2.75% gro
         },
       ],
       relatedPages: [
-        { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
-      ],
+          ],
     },
     'housing-levy-calculator-kenya': {
       slug: 'housing-levy-calculator-kenya',

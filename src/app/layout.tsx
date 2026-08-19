@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Sora, Public_Sans, Cairo } from 'next/font/google';
 import './globals.css';
 import './regulo.css';
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -82,8 +83,16 @@ export default function RootLayout({
   // Ventures Metrika account. Env-overridable; no secret involved.
   const ymId = process.env.NEXT_PUBLIC_YM_ID || '111495493';
 
+  // Language follows the country segment: /mx and /co are Spanish, /ma is
+  // French, /ke and the root are English. Served from the request path because
+  // the root layout is the only place <html> exists.
+  const pathname = (await headers()).get('x-regulo-path') ?? '/';
+  const segment = pathname.split('/')[1];
+  const lang =
+    segment === 'mx' || segment === 'co' ? 'es' : segment === 'ma' ? 'fr' : 'en';
+
   return (
-    <html lang="en" className={`${sora.variable} ${publicSans.variable} ${cairo.variable}`}>
+    <html lang={lang} className={`${sora.variable} ${publicSans.variable} ${cairo.variable}`}>
       <body>
         <GoogleAnalytics gaId={gaId} />
         <script

@@ -240,8 +240,7 @@ Une déduction d'impôt de **50 DH par mois et par personne à charge** (conjoin
       relatedPages: [
         { title: 'Calculateur Salaire Net Maroc 2026', href: '/ma/calculateur-salaire-net-maroc' },
         { title: 'Passer du Salaire Brut au Net Maroc', href: '/ma/salaire-brut-net-maroc' },
-        { title: 'Simulateur IR Maroc', href: '/ma/calcul-ir-maroc' },
-      ],
+          ],
     },
     'calculateur-salaire-net-maroc': {
       slug: 'calculateur-salaire-net-maroc',
@@ -262,8 +261,7 @@ Accédez à un simulateur de fiche de paie interactif conçu pour les salariés 
         },
       ],
       relatedPages: [
-        { title: 'Calculateur Principal', href: '/ma/salaire-net-calculateur' },
-      ],
+          ],
     },
     'salaire-brut-net-maroc': {
       slug: 'salaire-brut-net-maroc',
@@ -284,8 +282,7 @@ Découvrez les pourcentages exacts prélevés sur votre salaire brut et l'impact
         },
       ],
       relatedPages: [
-        { title: 'Calculateur Principal', href: '/ma/salaire-net-calculateur' },
-      ],
+          ],
     },
     'calcul-ir-maroc': {
       slug: 'calcul-ir-maroc',
