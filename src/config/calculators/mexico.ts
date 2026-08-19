@@ -166,95 +166,6 @@ export const MEXICO_CALCULATOR_CONFIG: CalculatorConfig = {
   ],
   calculate: calculateMexicoAguinaldo,
   pages: {
-    'aguinaldo-calculator': {
-      slug: 'aguinaldo-calculator',
-      title: 'Calculadora Aguinaldo Neto 2026 México — UMA Oficial $117.31 & LFT',
-      h1: 'Calculadora de Aguinaldo Neto 2026 en México',
-      metaDescription: 'Calcula libre de errores tu aguinaldo neto 2026 en México. Incluye exención oficial de 30 UMA 2026 ($3,519.30 MXN), cálculo proporcional y retención de ISR.',
-      keywords: ['calculadora aguinaldo neto 2026', 'como calcular el aguinaldo en mexico', 'aguinaldo exento isr 2026 3519', 'ley federal del trabajo aguinaldo'],
-      canonicalUrl: 'https://regulo.online/mx/aguinaldo-calculator',
-      explanationMarkdown: `
-### ¿Cómo se calcula el Aguinaldo en México para 2026?
-
-El aguinaldo es una prestación laboral obligatoria estipulada en el **Artículo 87 de la Ley Federal del Trabajo (LFT)**. Todos los trabajadores subordinados en México tienen derecho a recibirlo **antes del 20 de diciembre** de cada año.
-
-#### 1. Fórmula Base de Ley
-El mínimo establecido por ley son **15 días de salario diario** por un año completo laborado (365 días):
-
-$$\\text{Salario Diario} = \\frac{\\text{Salario Mensual}}{30}$$
-$$\\text{Aguinaldo Bruto Proporcional} = (\\text{Salario Diario} \\times \\text{Días de Aguinaldo}) \\times \\left(\\frac{\\text{Días Trabajados}}{365}\\right)$$
-
-#### 2. Exención de ISR (30 UMA Diarias Oficiales 2026)
-Conforme al **Artículo 93, Fracción XIV de la LISR**, el aguinaldo está exento de ISR hasta por el equivalente a **30 Unidades de Medida y Actualización (UMA)** diarias:
-
-* **UMA Diaria Oficial 2026 (INEGI, vigente del 1 feb 2026)**: **$117.31 MXN** (Mensual $3,566.22 MXN, Anual $42,794.64 MXN).
-* **Monto Exento de Impuesto 2026**: 30 × $117.31 = **$3,519.30 MXN** *(En enero de 2026 aplica la UMA 2025 de $113.14 MXN = $3,394.20 MXN)*.
-
-Cualquier excedente sobre $3,519.30 MXN formará la **Base Gravable** a la que se le aplica la tarifa de retención de ISR (Art. 96 LISR).
-      `,
-      faqs: [
-        {
-          question: '¿Cuál es la fecha límite para recibir el aguinaldo en México?',
-          answer: 'La fecha límite de pago conforme al Artículo 87 de la Ley Federal del Trabajo es el 19 de diciembre (debe estar pagado antes del día 20 de diciembre).',
-        },
-        {
-          question: '¿Cuánto aguinaldo me toca si trabajé menos de un año?',
-          answer: 'Te corresponde la parte proporcional. Divides tus días laborados entre 365 y multiplicas ese factor por el aguinaldo anual completo.',
-        },
-        {
-          question: '¿El aguinaldo paga impuestos?',
-          answer: 'Sí, pero solo por la parte que exceda 30 UMA ($3,519.30 MXN con la UMA 2026 oficial). Los primeros $3,519.30 MXN están completamente exentos de ISR.',
-        },
-      ],
-      relatedPages: [
-        { title: 'Calculadora Aguinaldo Neto 2026', href: '/mx/aguinaldo-neto-calculadora-2026' },
-        { title: 'Calculadora ISR Aguinaldo', href: '/mx/isr-aguinaldo-calculator' },
-        { title: 'Salario Neto México', href: '/mx/salario-neto-mexico' },
-          ],
-    },
-    'aguinaldo-neto-calculadora-2026': {
-      slug: 'aguinaldo-neto-calculadora-2026',
-      title: 'Calculadora Aguinaldo Neto 2026 — Descuento ISR Exacto (UMA $117.31)',
-      h1: 'Calculadora Aguinaldo Neto 2026',
-      metaDescription: 'Determina en segundos tu aguinaldo neto libre de impuestos para el ejercicio 2026 en México ajustado a la UMA oficial de $117.31 MXN.',
-      keywords: ['aguinaldo neto 2026', 'cuanto me toca de aguinaldo 2026', 'calculo aguinaldo mexico'],
-      canonicalUrl: 'https://regulo.online/mx/aguinaldo-neto-calculadora-2026',
-      explanationMarkdown: `
-### Tu Aguinaldo Neto Libre de Impuestos en 2026
-
-Ingresa tu salario base y obtén el desglose detallado de lo que recibirás depositado en tu cuenta bancaria con la UMA 2026 oficial.
-      `,
-      faqs: [
-        {
-          question: '¿Pueden pagarme el aguinaldo en especie o mercancías?',
-          answer: 'No. El Artículo 87 de la LFT prohíbe el pago en fichas, mercancías o vales. Debe pagarse en moneda de curso legal.',
-        },
-      ],
-      relatedPages: [
-          ],
-    },
-    'isr-aguinaldo-calculator': {
-      slug: 'isr-aguinaldo-calculator',
-      title: 'ISR Aguinaldo Calculator 2026 — Cuánto Impuesto Te Quitan',
-      h1: 'Calculadora de ISR en Aguinaldo 2026',
-      metaDescription: 'Descubre exactamente cuánto ISR te retendrá el SAT de tu aguinaldo de fin de año 2026.',
-      keywords: ['isr aguinaldo calculator', 'retencion isr aguinaldo', 'impuesto aguinaldo sat'],
-      canonicalUrl: 'https://regulo.online/mx/isr-aguinaldo-calculator',
-      explanationMarkdown: `
-### Retención de ISR del SAT sobre Gratificaciones de Fin de Año
-
-Aprende cómo opera la retención de ISR conforme a las tablas vigentes del SAT y la exención de 30 UMA ($3,519.30 MXN).
-      `,
-      faqs: [
-        {
-          question: '¿Qué pasa si mi aguinaldo es menor a 30 UMA?',
-          answer: 'Si tu aguinaldo bruto es menor o igual a $3,519.30 MXN (UMA 2026 oficial), está 100% exento de ISR y no sufres ninguna retención.',
-        },
-      ],
-      relatedPages: [
-        { title: 'Calculadora Principal', href: '/mx/aguinaldo-calculator' },
-      ],
-    },
     'salario-neto-mexico': {
       slug: 'salario-neto-mexico',
       title: 'Salario Neto México 2026 — De Bruto a Neto Mensual',
@@ -275,28 +186,6 @@ Conoce la diferencia entre lo que pactas en tu contrato laboral y lo que realmen
       ],
       relatedPages: [
           ],
-    },
-    'calculadora-isr-mexico': {
-      slug: 'calculadora-isr-mexico',
-      title: 'Calculadora ISR México 2026 — Tablas SAT Vigentes',
-      h1: 'Calculadora de ISR México 2026',
-      metaDescription: 'Estima tu retención de ISR mensual conforme a las tablas oficiales publicadas por el SAT.',
-      keywords: ['calculadora isr mexico', 'tablas isr 2026', 'impuesto sobre la renta sat'],
-      canonicalUrl: 'https://regulo.online/mx/calculadora-isr-mexico',
-      explanationMarkdown: `
-### Tablas y Tarifas de Impuesto Sobre la Renta (ISR)
-
-Explicación del cálculo progresivo del ISR mediante cuota fija y porcentaje sobre el límite inferior.
-      `,
-      faqs: [
-        {
-          question: '¿La tarifa de ISR es progresiva?',
-          answer: 'Sí. A mayor ingreso, mayor es la tasa marginal aplicada, la cual oscila entre el 1.92% y el 35%.',
-        },
-      ],
-      relatedPages: [
-        { title: 'Calculadora Principal Aguinaldo', href: '/mx/aguinaldo-calculator' },
-      ],
     },
   },
 };

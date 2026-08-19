@@ -291,29 +291,6 @@ PAYE is charged on Taxable Base (Gross Salary minus allowable NSSF and pension d
         { title: 'SHIF Calculator Kenya 2026', href: '/ke/shif-calculator-kenya' },
           ],
     },
-    'kenya-net-salary-calculator-2026': {
-      slug: 'kenya-net-salary-calculator-2026',
-      title: 'Kenya Net Salary Calculator 2026 — Latest KRA & NSSF Rules',
-      h1: 'Kenya Net Salary Calculator 2026 (Updated Rules)',
-      metaDescription: 'Calculate your updated 2026 net salary in Kenya including new KRA income tax brackets, SHIF health rates, and 2026 NSSF schedule (max KES 6,480).',
-      keywords: ['kenya net salary 2026', 'kra tax bands 2026', 'salary after tax kenya 2026'],
-      canonicalUrl: 'https://regulo.online/ke/kenya-net-salary-calculator-2026',
-      explanationMarkdown: `
-### Updated 2026 Kenya Net Salary Rules
-
-Calculations on this page reflect all statutory amendments passed in the latest Kenya Finance Acts, NSSF 2026 schedule, and Ministry of Health directives.
-      `,
-      faqs: [
-        {
-          question: 'Are voluntary pension contributions tax deductible in Kenya?',
-          answer: 'Yes, voluntary contributions to a registered pension scheme are tax-exempt up to KES 20,000 per month (KES 240,000 per year).',
-        },
-      ],
-      relatedPages: [
-        { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
-        { title: 'PAYE Calculator Kenya', href: '/ke/paye-calculator-kenya' },
-      ],
-    },
     'salary-after-tax-kenya': {
       slug: 'salary-after-tax-kenya',
       title: 'Salary After Tax Kenya — How Much Do You Take Home?',
@@ -336,29 +313,6 @@ Your salary after tax is your final disposable income after all legal statutory 
         { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
           ],
     },
-    'paye-calculator-kenya': {
-      slug: 'paye-calculator-kenya',
-      title: 'PAYE Calculator Kenya 2026 — Official KRA Tax Brackets',
-      h1: 'KRA PAYE Tax Calculator 2026',
-      metaDescription: 'Calculate KRA Pay As You Earn (PAYE) tax liability for Kenyan employees. Includes tax brackets, personal relief, and SHIF tax relief.',
-      keywords: ['paye calculator kenya', 'kra tax calculator', 'paye tax bands kenya'],
-      canonicalUrl: 'https://regulo.online/ke/paye-calculator-kenya',
-      explanationMarkdown: `
-### KRA PAYE Tax Computation Guide
-
-PAYE (Pay As You Earn) is calculated progressively on Taxable Base (Gross Salary minus allowable NSSF and pension deductions).
-      `,
-      faqs: [
-        {
-          question: 'What is the top PAYE tax rate in Kenya?',
-          answer: 'The maximum statutory PAYE bracket rate in Kenya is 35% on monthly taxable earnings exceeding KES 800,000.',
-        },
-      ],
-      relatedPages: [
-        { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
-        { title: 'Housing Levy Calculator', href: '/ke/housing-levy-calculator-kenya' },
-      ],
-    },
     'shif-calculator-kenya': {
       slug: 'shif-calculator-kenya',
       title: 'SHIF Calculator Kenya 2026 — Social Health Insurance Fund Rates',
@@ -379,28 +333,6 @@ SHIF replaced NHIF under the Social Health Insurance Act. It imposes a 2.75% gro
       ],
       relatedPages: [
           ],
-    },
-    'housing-levy-calculator-kenya': {
-      slug: 'housing-levy-calculator-kenya',
-      title: 'Housing Levy Calculator Kenya 2026 — 1.5% Contribution Rule',
-      h1: 'Affordable Housing Levy Calculator Kenya',
-      metaDescription: 'Calculate mandatory 1.5% Affordable Housing Levy deduction for Kenyan workers and employer matching costs under statutory rules.',
-      keywords: ['housing levy calculator kenya', 'housing levy 1.5 kenya', 'affordable housing deduction'],
-      canonicalUrl: 'https://regulo.online/ke/housing-levy-calculator-kenya',
-      explanationMarkdown: `
-### Affordable Housing Levy Calculation
-
-The Housing Levy is charged at **1.5% of gross monthly salary** for employees, matched by a 1.5% employer contribution.
-      `,
-      faqs: [
-        {
-          question: 'Does the employer also pay the Housing Levy in Kenya?',
-          answer: 'Yes, employers match the employee contribution with an equal 1.5% of gross monthly earnings.',
-        },
-      ],
-      relatedPages: [
-        { title: 'Main Net Salary Calculator', href: '/ke/net-salary-calculator' },
-      ],
     },
   },
 };
